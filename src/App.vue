@@ -133,8 +133,8 @@ const filteredDocs = computed(() => currentDocs.value.filter((doc) => !query.val
 const groups = computed(() => {
   const sections = [
     { title: '开始阅读', test: (doc) => doc.number === 0 },
-    { title: '正文', test: (doc) => doc.number > 0 && !/附录|勘误|API时效|术语表|更多资源/.test(doc.file) },
-    { title: '附录', test: (doc) => doc.number > 0 && /附录|勘误|API时效|术语表|更多资源/.test(doc.file) },
+    { title: '正文', test: (doc) => doc.number > 0 && !/附录|勘误|API时效|术语表|更多资源|参考文献/.test(doc.file) },
+    { title: '附录', test: (doc) => doc.number > 0 && /附录|勘误|API时效|术语表|更多资源|参考文献/.test(doc.file) },
   ]
   return sections.map((section) => ({ ...section, docs: filteredDocs.value.filter(section.test) })).filter((section) => section.docs.length)
 })
@@ -194,7 +194,7 @@ window.addEventListener('keydown', (event) => {
     <div class="home-wrap">
       <section class="home-hero">
         <h1>Trans Books City</h1>
-        <p>三本英文技术书籍的中文译本——领域建模、全栈开发与浏览器工程，译文经逐章评审与原书勘误核对。</p>
+        <p>{{ BOOKS.length }} 本英文技术书籍的中文译本，译文经逐章评审与原书勘误核对。</p>
       </section>
       <section class="book-grid">
         <button v-for="book in BOOKS" :key="book.slug" class="book-card" @click="openBook(book)">

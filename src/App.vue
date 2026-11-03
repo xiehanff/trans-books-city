@@ -55,7 +55,9 @@ const docs = Object.entries(files)
   .map(([path, content]) => {
     const [, , slug, filename] = path.split('/')
     const file = decodeURIComponent(filename)
-    const title = content.match(/^#\s+(.+)$/m)?.[1]?.replace(/`/g, '') || file.replace(/\.md$/, '')
+    // 部分文件以“第 X 部分”扉页开头，目录标题优先取章级标题（第 N 章/导言），与文件里的实际章节对应
+    const chapter = content.match(/^#{1,4}[ \t]+第\s*[0-9]+\s*章[^\n]*$|^#{1,4}[ \t]+导言[^\n]*$/m)?.[0]
+    const title = (chapter || content.match(/^#\s+(.+)$/m)?.[1] || file.replace(/\.md$/, '')).replace(/^#{1,4}[ \t]+/, '').replace(/`/g, '')
     const number = file.match(/^(\d+)/)
     return { book: slug, id: file, title, content, number: number ? Number(number[1]) : 999, file }
   })

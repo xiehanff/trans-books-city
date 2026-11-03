@@ -4,6 +4,7 @@ import MarkdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
 import hljs from 'highlight.js/lib/core'
 import bash from 'highlight.js/lib/languages/bash'
+import c from 'highlight.js/lib/languages/c'
 import csharp from 'highlight.js/lib/languages/csharp'
 import css from 'highlight.js/lib/languages/css'
 import dockerfile from 'highlight.js/lib/languages/dockerfile'
@@ -17,13 +18,15 @@ import python from 'highlight.js/lib/languages/python'
 import sql from 'highlight.js/lib/languages/sql'
 import typescript from 'highlight.js/lib/languages/typescript'
 import xml from 'highlight.js/lib/languages/xml'
+import x86asm from 'highlight.js/lib/languages/x86asm'
 import yaml from 'highlight.js/lib/languages/yaml'
 import 'highlight.js/styles/github.css'
 import coverDomainModeling from './assets/covers/domain-modeling-made-functional.jpg'
 import coverCompleteDeveloper from './assets/covers/the-complete-developer.jpg'
 import coverWebBrowser from './assets/covers/web-browser-engineering.jpg'
+import coverWritingC from './assets/covers/writing-a-c-compiler.jpg'
 
-;[['bash', bash], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
+;[['asm', x86asm], ['bash', bash], ['c', c], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
 const REPO = 'https://github.com/xiehanff/trans-books-city'
 const BOOKS = [
@@ -53,6 +56,15 @@ const BOOKS = [
     author: 'Pavel Panchekha / Chris Harrelson',
     cover: coverWebBrowser,
     desc: '从下载网页、解析 HTML、排版绘制到运行 JavaScript，亲手构建一个浏览器，驱散黑盒的神秘感。',
+  },
+  {
+    slug: 'writing-a-c-compiler',
+    title: 'Writing a C Compiler',
+    zh: '动手写 C 编译器',
+    label: 'WRITING A C COMPILER',
+    author: 'Nora Sandler',
+    cover: coverWritingC,
+    desc: '从返回常量到结构体与寄存器分配，用 20 章一步步实现一个真实可用的 C 编译器，吃透 C 语言与 x86-64 汇编。',
   },
 ]
 

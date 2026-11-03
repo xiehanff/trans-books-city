@@ -19,6 +19,9 @@ import typescript from 'highlight.js/lib/languages/typescript'
 import xml from 'highlight.js/lib/languages/xml'
 import yaml from 'highlight.js/lib/languages/yaml'
 import 'highlight.js/styles/github.css'
+import coverDomainModeling from './assets/covers/domain-modeling-made-functional.jpg'
+import coverCompleteDeveloper from './assets/covers/the-complete-developer.jpg'
+import coverWebBrowser from './assets/covers/web-browser-engineering.jpg'
 
 ;[['bash', bash], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
@@ -30,6 +33,7 @@ const BOOKS = [
     zh: '领域建模函数式',
     label: 'DOMAIN MODELING MADE FUNCTIONAL',
     author: 'Scott Wlaschin',
+    cover: coverDomainModeling,
     desc: '函数式编程是领域建模的绝佳选择——用 F# 的类型与管道，产出既清晰又简洁的领域设计。',
   },
   {
@@ -38,6 +42,7 @@ const BOOKS = [
     zh: '全栈开发者',
     label: 'THE COMPLETE DEVELOPER',
     author: 'Martin Krause',
+    cover: coverCompleteDeveloper,
     desc: '从 Node.js、TypeScript、React 到 GraphQL、OAuth 与 Docker，一次打通现代全栈 Web 开发。',
   },
   {
@@ -46,6 +51,7 @@ const BOOKS = [
     zh: '浏览器工程',
     label: 'WEB BROWSER ENGINEERING',
     author: 'Pavel Panchekha / Chris Harrelson',
+    cover: coverWebBrowser,
     desc: '从下载网页、解析 HTML、排版绘制到运行 JavaScript，亲手构建一个浏览器，驱散黑盒的神秘感。',
   },
 ]
@@ -179,8 +185,8 @@ window.addEventListener('keydown', (event) => {
         <p>三本英文技术书籍的中文译本——领域建模、全栈开发与浏览器工程，译文经逐章评审与原书勘误核对。</p>
       </section>
       <section class="book-grid">
-        <button v-for="(book, index) in BOOKS" :key="book.slug" class="book-card" @click="openBook(book)">
-          <span class="book-cover">{{ String(index + 1).padStart(2, '0') }}</span>
+        <button v-for="book in BOOKS" :key="book.slug" class="book-card" @click="openBook(book)">
+          <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
           <div class="book-info">
             <h2 class="book-title">{{ book.title }}</h2>
             <p class="book-zh">{{ book.zh }} · 中文版</p>

@@ -23,11 +23,6 @@ import xml from 'highlight.js/lib/languages/xml'
 import x86asm from 'highlight.js/lib/languages/x86asm'
 import yaml from 'highlight.js/lib/languages/yaml'
 import 'highlight.js/styles/github.css'
-import coverDomainModeling from './assets/covers/domain-modeling-made-functional.jpg'
-import coverCompleteDeveloper from './assets/covers/the-complete-developer.jpg'
-import coverWebBrowser from './assets/covers/web-browser-engineering.jpg'
-import coverWritingC from './assets/covers/writing-a-c-compiler.jpg'
-import coverAlgorithmDesignManual from './assets/covers/algorithm-design-manual.jpg'
 import coverCsapp from './assets/covers/csapp-third-edition.jpg'
 import coverOstep from './assets/covers/ostep.jpg'
 import coverSicp from './assets/covers/sicp-2e.jpg'
@@ -37,51 +32,6 @@ import coverComputerNetworking from './assets/covers/computer-networking-top-dow
 
 const REPO = 'https://github.com/xiehanff/trans-books-city'
 const BOOKS = [
-  {
-    slug: 'the-algorithm-design-manual',
-    title: 'The Algorithm Design Manual',
-    zh: '算法设计指南',
-    label: 'THE ALGORITHM DESIGN MANUAL',
-    author: 'Steven S. Skiena',
-    cover: coverAlgorithmDesignManual,
-    desc: '从算法分析、数据结构、排序与查找，到图算法、动态规划和近似算法，系统学习经典算法设计方法。',
-  },
-  {
-    slug: 'domain-modeling-made-functional',
-    title: 'Domain Modeling Made Functional',
-    zh: '领域建模函数式',
-    label: 'DOMAIN MODELING MADE FUNCTIONAL',
-    author: 'Scott Wlaschin',
-    cover: coverDomainModeling,
-    desc: '函数式编程是领域建模的绝佳选择——用 F# 的类型与管道，产出既清晰又简洁的领域设计。',
-  },
-  {
-    slug: 'the-complete-developer',
-    title: 'The Complete Developer',
-    zh: '全栈开发者',
-    label: 'THE COMPLETE DEVELOPER',
-    author: 'Martin Krause',
-    cover: coverCompleteDeveloper,
-    desc: '从 Node.js、TypeScript、React 到 GraphQL、OAuth 与 Docker，一次打通现代全栈 Web 开发。',
-  },
-  {
-    slug: 'web-browser-engineering',
-    title: 'Web Browser Engineering',
-    zh: '浏览器工程',
-    label: 'WEB BROWSER ENGINEERING',
-    author: 'Pavel Panchekha / Chris Harrelson',
-    cover: coverWebBrowser,
-    desc: '从下载网页、解析 HTML、排版绘制到运行 JavaScript，亲手构建一个浏览器，驱散黑盒的神秘感。',
-  },
-  {
-    slug: 'writing-a-c-compiler',
-    title: 'Writing a C Compiler',
-    zh: '动手写 C 编译器',
-    label: 'WRITING A C COMPILER',
-    author: 'Nora Sandler',
-    cover: coverWritingC,
-    desc: '从返回常量到结构体与寄存器分配，用 20 章一步步实现一个真实可用的 C 编译器，吃透 C 语言与 x86-64 汇编。',
-  },
   {
     slug: 'computer-systems-3e',
     title: 'Computer Systems: A Programmer’s Perspective',

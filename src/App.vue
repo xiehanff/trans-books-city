@@ -28,6 +28,10 @@ import coverCompleteDeveloper from './assets/covers/the-complete-developer.jpg'
 import coverWebBrowser from './assets/covers/web-browser-engineering.jpg'
 import coverWritingC from './assets/covers/writing-a-c-compiler.jpg'
 import coverAlgorithmDesignManual from './assets/covers/algorithm-design-manual.jpg'
+import coverCsapp from './assets/covers/csapp-third-edition.jpg'
+import coverOstep from './assets/covers/ostep.jpg'
+import coverSicp from './assets/covers/sicp-2e.jpg'
+import coverComputerNetworking from './assets/covers/computer-networking-top-down.jpg'
 
 ;[['asm', x86asm], ['bash', bash], ['c', c], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
@@ -77,6 +81,42 @@ const BOOKS = [
     author: 'Nora Sandler',
     cover: coverWritingC,
     desc: '从返回常量到结构体与寄存器分配，用 20 章一步步实现一个真实可用的 C 编译器，吃透 C 语言与 x86-64 汇编。',
+  },
+  {
+    slug: 'computer-systems-3e',
+    title: 'Computer Systems: A Programmer’s Perspective',
+    zh: '深入理解计算机系统（原书第 3 版）',
+    label: 'COMPUTER SYSTEMS',
+    author: 'Randal E. Bryant / David R. O’Hallaron',
+    cover: coverCsapp,
+    desc: '从程序表示与执行，到链接、异常控制流、虚拟内存、网络与并发，系统理解计算机系统的软硬件基础。',
+  },
+  {
+    slug: 'operating-systems-three-easy-pieces',
+    title: 'Operating Systems: Three Easy Pieces',
+    zh: '操作系统导论',
+    label: 'OPERATING SYSTEMS',
+    author: 'Remzi H. Arpaci-Dusseau / Andrea C. Arpaci-Dusseau',
+    cover: coverOstep,
+    desc: '以虚拟化、并发、持久性三大主题贯穿进程、调度、内存、文件系统与分布式，对话式讲解操作系统核心原理。',
+  },
+  {
+    slug: 'structure-and-interpretation-of-computer-programs',
+    title: 'Structure and Interpretation of Computer Programs',
+    zh: '计算机程序的构造和解释（第 2 版）',
+    label: 'SICP',
+    author: 'Harold Abelson / Gerald Jay Sussman / Julie Sussman',
+    cover: coverSicp,
+    desc: '用 Scheme 讲透过程抽象、数据抽象、模块化与元语言抽象，程序设计的经典之作，裘宗燕译本。',
+  },
+  {
+    slug: 'computer-networking-top-down-6e',
+    title: 'Computer Networking: A Top-Down Approach',
+    zh: '计算机网络：自顶向下方法（原书第 6 版）',
+    label: 'COMPUTER NETWORKING',
+    author: 'James F. Kurose / Keith W. Ross',
+    cover: coverComputerNetworking,
+    desc: '从应用层一路向下，讲透运输层、网络层与链路层，配 Wireshark 实验与编程作业的自顶向下网络经典教材。',
   },
 ]
 
@@ -205,12 +245,12 @@ const rendered = computed(() => {
   const content = activeDocKey.value ? contentById[activeDocKey.value] : ''
   return content && active.value ? renderMarkdown(content, active.value) : ''
 })
-function activateDoc(doc) {
+function activateDoc(doc, scrollToTop = true) {
   if (doc.book !== activeBookSlug.value) query.value = ''
   activeBookSlug.value = doc.book
   activeId.value = doc.id
   menuOpen.value = false
-  window.scrollTo(0, 0)
+  if (scrollToTop) window.scrollTo(0, 0)
   loadDoc(doc).catch(() => {})
 }
 function select(doc) {
@@ -232,7 +272,7 @@ function goHome() {
   window.scrollTo(0, 0)
 }
 // hash 不是响应式的，必须监听 hashchange：正文里的章节链接、浏览器前进后退都走这里
-function syncFromHash() {
+function syncFromHash(scrollToTop = true) {
   const id = decodeURIComponent(location.hash.slice(1)).replace(/^\//, '')
   if (!id) {
     if (activeBookSlug.value) goHome()
@@ -242,10 +282,10 @@ function syncFromHash() {
   const book = BOOKS.find((item) => item.slug === slug)
   const doc = book ? book.chapters.find((item) => item.file === file) : null
   if (!doc) return
-  activateDoc(doc)
+  activateDoc(doc, scrollToTop)
 }
-syncFromHash()
-window.addEventListener('hashchange', syncFromHash)
+syncFromHash(false)
+window.addEventListener('hashchange', () => syncFromHash())
 window.addEventListener('keydown', (event) => {
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
     event.preventDefault()
@@ -264,7 +304,7 @@ window.addEventListener('keydown', (event) => {
     <div class="home-wrap">
       <section class="home-hero">
         <h1>Trans Books City</h1>
-        <p>{{ BOOKS.length }} 本英文技术书籍的中文译本，译文经逐章评审与原书勘误核对。</p>
+        <p>{{ BOOKS.length }} 本精选技术书籍的中文版，译文经逐章评审与原书核对。</p>
       </section>
       <section class="book-grid">
         <button v-for="book in BOOKS" :key="book.slug" class="book-card" @click="openBook(book)">

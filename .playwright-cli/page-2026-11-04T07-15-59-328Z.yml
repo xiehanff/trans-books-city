@@ -1,0 +1,386 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "H Hax Compose101" [ref=e4] [cursor=pointer]:
+      - /url: "#"
+      - generic [ref=e5]: H
+      - generic [ref=e6]: Hax Compose101
+    - generic [ref=e7]:
+      - generic [ref=e8]: 中文教程 · Android Jetpack Compose
+      - link "GitHub" [ref=e9] [cursor=pointer]:
+        - /url: https://github.com/xiehanff/compose-learning-docs
+        - text: GitHub ↗
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: ⌕
+        - textbox "搜索文档" [ref=e14]:
+          - /placeholder: 搜索文档…
+        - generic [ref=e15]: ⌘ K
+      - navigation "文档目录" [ref=e16]:
+        - generic [ref=e17]:
+          - heading "开始学习" [level=2] [ref=e18]
+          - button "Compose 完整学习规划（预备篇 + 第 1—87 章）" [ref=e19] [cursor=pointer]
+          - button "预备篇 A：零基础环境准备与第一次构建" [ref=e20] [cursor=pointer]
+          - button "预备篇 B：Gradle 构建系统从入门到理解" [ref=e21] [cursor=pointer]
+          - button "预备篇 C：Gradle 构建报错定位与自救" [ref=e22] [cursor=pointer]
+          - button "预备篇 D：Kotlin 基础与 Compose 必读语法" [ref=e23] [cursor=pointer]
+          - button "预备篇 E：Android 项目、资源、生命周期与日志基础" [ref=e24] [cursor=pointer]
+        - generic [ref=e25]:
+          - heading "基础篇" [level=2] [ref=e26]
+          - button "第 1 章：MainActivity、ComponentActivity、onCreate 与 setContent" [ref=e27] [cursor=pointer]
+          - button "第 2 章：@Composable 与 Composable 函数" [ref=e28] [cursor=pointer]
+          - button "第 3 章：MaterialTheme 与 DemoTheme" [ref=e29] [cursor=pointer]
+          - button "第 4 章：rememberNavController、NavHost、composable 与路由参数" [ref=e30] [cursor=pointer]
+          - button "第 5 章：Lambda、点击回调与 item 到导航的完整链路" [ref=e31] [cursor=pointer]
+          - button "第 6 章：Scaffold、TopAppBar 与内容区 padding" [ref=e32] [cursor=pointer]
+          - button "第 7 章：Modifier 的本质、作用范围与调用顺序" [ref=e33] [cursor=pointer]
+          - button "第 8 章：Column、Row、Arrangement 与 Alignment" [ref=e34] [cursor=pointer]
+          - button "第 8A 章：FlowRow 与流式布局" [ref=e35] [cursor=pointer]
+          - button "第 9 章：Box、层叠布局与 Flutter Stack" [ref=e36] [cursor=pointer]
+          - button "第 10 章：Card、Surface 与容器组件的区别" [ref=e37] [cursor=pointer]
+          - button "第 11 章：Text、TextStyle、FontWeight 与 lineHeight" [ref=e38] [cursor=pointer]
+          - button "第 12 章：Image、Painter、contentDescription 与 ContentScale" [ref=e39] [cursor=pointer]
+          - button "第 13 章：padding、size、fillMaxWidth 与 fillMaxSize" [ref=e40] [cursor=pointer]
+          - button "第 14 章：weight、Spacer 与 Flutter Expanded" [ref=e41] [cursor=pointer]
+          - button "第 15 章：RoundedCornerShape、background、clip 与 border" [ref=e42] [cursor=pointer]
+          - button "第 16 章：LazyColumn、item、items 与 itemsIndexed" [ref=e43] [cursor=pointer]
+          - button "第 17 章：key 与列表项身份" [ref=e44] [cursor=pointer]
+          - button "第 18 章：LazyVerticalGrid 与 GridCells" [ref=e45] [cursor=pointer]
+          - button "第 19 章：verticalScroll、horizontalScroll 与 rememberScrollState" [ref=e46] [cursor=pointer]
+          - button "第 20 章：Lazy 容器与普通滚动容器的选择" [ref=e47] [cursor=pointer]
+          - button "第 21 章：remember、mutableStateOf 与状态委托" [ref=e48] [cursor=pointer]
+          - button "第 22 章：重组什么时候发生，什么代码可能重复执行" [ref=e49] [cursor=pointer]
+          - button "第 23 章：rememberSaveable 与配置变化后的状态恢复" [ref=e50] [cursor=pointer]
+          - button "第 24 章：状态提升：状态放在哪里，事件回调传向哪里" [ref=e51] [cursor=pointer]
+          - button "第 25 章：SideEffect、LaunchedEffect 与普通业务代码的边界" [ref=e52] [cursor=pointer]
+          - button "第 26 章：Button、IconButton 与 Icon" [ref=e53] [cursor=pointer]
+          - button "第 26A 章：TextField、OutlinedTextField 与输入状态" [ref=e54] [cursor=pointer]
+          - button "第 26B 章：Checkbox、Switch 与 Slider 选择控件" [ref=e55] [cursor=pointer]
+          - button "第 27 章：AlertDialog" [ref=e56] [cursor=pointer]
+          - button "第 28 章：ModalBottomSheet" [ref=e57] [cursor=pointer]
+          - button "第 29 章：SnackbarHostState、协程与 Snackbar" [ref=e58] [cursor=pointer]
+          - button "第 30 章：CircularProgressIndicator 与 LinearProgressIndicator" [ref=e59] [cursor=pointer]
+          - button "第 31 章：NavigationBar 与 NavigationBarItem" [ref=e60] [cursor=pointer]
+          - button "第 32 章：TabRow 与 Tab" [ref=e61] [cursor=pointer]
+          - button "第 33 章：Compose 中模拟 Flutter IndexedStack" [ref=e62] [cursor=pointer]
+          - button "第 34 章：页面切换时如何保留状态" [ref=e63] [cursor=pointer]
+          - button "第 35 章：组件内部状态与页面导航状态的区别" [ref=e64] [cursor=pointer]
+          - button "第 36 章：ComponentInfo 类及其四个字段" [ref=e65] [cursor=pointer]
+          - button "第 37 章：@Composable () -> Unit 作为可运行 UI 数据" [ref=e66] [cursor=pointer]
+          - button "第 38 章：Kotlin object ComponentRegistry" [ref=e67] [cursor=pointer]
+          - button "第 39 章：List、firstOrNull 与可空返回值" [ref=e68] [cursor=pointer]
+          - button "第 40 章：添加一个新 Demo 的完整步骤" [ref=e69] [cursor=pointer]
+          - button "第 41 章：Density 到底是什么" [ref=e70] [cursor=pointer]
+          - button "第 42 章：CompositionLocalProvider 与 LocalDensity" [ref=e71] [cursor=pointer]
+          - button "第 43 章：DesignWidthScale 如何影响整个子树" [ref=e72] [cursor=pointer]
+          - button "第 44 章：.px 与 .pxSp() 扩展属性和函数" [ref=e73] [cursor=pointer]
+          - button "第 45 章：与 Flutter 设计稿适配的对比、风险与建议" [ref=e74] [cursor=pointer]
+        - generic [ref=e75]:
+          - heading "进阶篇" [level=2] [ref=e76]
+          - button "第 46 章：重组的跳过机制与位置记忆" [ref=e77] [cursor=pointer]
+          - button "第 47 章：稳定性（Stability）与强跳过模式" [ref=e78] [cursor=pointer]
+          - button "第 48 章：derivedStateOf：派生状态" [ref=e79] [cursor=pointer]
+          - button "第 49 章：rememberUpdatedState 与 rememberCoroutineScope" [ref=e80] [cursor=pointer]
+          - button "第 50 章：snapshotFlow 与 Flow 数据接入" [ref=e81] [cursor=pointer]
+          - button "第 51 章：animate*AsState 与 Tween 基础动画" [ref=e82] [cursor=pointer]
+          - button "第 52 章：Animatable 与手动动画控制" [ref=e83] [cursor=pointer]
+          - button "第 53 章：AnimatedVisibility、AnimatedContent 与 Crossfade" [ref=e84] [cursor=pointer]
+          - button "第 54 章：updateTransition 多状态动画编排" [ref=e85] [cursor=pointer]
+          - button "第 55 章：动画规格：tween、spring、keyframes、repeatable 与 easing" [ref=e86] [cursor=pointer]
+          - button "第 56 章：rememberInfiniteTransition 与无限动画" [ref=e87] [cursor=pointer]
+          - button "第 57 章：Canvas 与 DrawScope 基础" [ref=e88] [cursor=pointer]
+          - button "第 58 章：drawBehind、drawWithContent 与 drawWithCache" [ref=e89] [cursor=pointer]
+          - button "第 59 章：Path、贝塞尔曲线与裁剪" [ref=e90] [cursor=pointer]
+          - button "第 60 章：Brush、Shader 与渐变" [ref=e91] [cursor=pointer]
+          - button "第 61 章：富文本：AnnotatedString、Span 与文本绘制" [ref=e92] [cursor=pointer]
+          - button "第 62 章：自定义 Layout：measure 与 place" [ref=e93] [cursor=pointer]
+          - button "第 63 章：Constraints 与固有尺寸测量" [ref=e94] [cursor=pointer]
+          - button "第 64 章：自定义 Modifier：layout、draw、pointerInput" [ref=e95] [cursor=pointer]
+          - button "第 65 章：手势检测：pointerInput 与手势探测器" [ref=e96] [cursor=pointer]
+          - button "第 66 章：手势冲突与嵌套滚动" [ref=e97] [cursor=pointer]
+          - button "第 67 章：AndroidView 与 ComposeView：与 View 体系互操作" [ref=e98] [cursor=pointer]
+          - button "第 68 章：ViewModel、StateFlow 与 UDF 单向数据流" [ref=e99] [cursor=pointer]
+          - button "第 69 章：Hilt 依赖注入" [ref=e100] [cursor=pointer]
+          - button "第 70 章：生命周期感知：repeatOnLifecycle 与 LifecycleEventEffect" [ref=e101] [cursor=pointer]
+          - button "第 71 章：导航进阶：嵌套导航图与类型安全导航" [ref=e102] [cursor=pointer]
+          - button "第 71A 章：Navigation 3 与 NavDisplay" [ref=e103] [cursor=pointer]
+          - button "第 72 章：状态持久化：rememberSaveable、DataStore 与 Room 的边界" [ref=e104] [cursor=pointer]
+          - button "第 73 章：协程进阶：Dispatchers、结构化并发与 Flow 操作符" [ref=e105] [cursor=pointer]
+          - button "第 74 章：性能分析：Layout Inspector 与编译器报告" [ref=e106] [cursor=pointer]
+          - button "第 75 章：Lazy 列表性能优化" [ref=e107] [cursor=pointer]
+          - button "第 76 章：Compose UI 测试：语义树与交互测试" [ref=e108] [cursor=pointer]
+          - button "第 77 章：主题进阶：动态取色、Shape 与 Typography" [ref=e109] [cursor=pointer]
+          - button "第 78 章：边缘到边缘与 Window Insets" [ref=e110] [cursor=pointer]
+          - button "第 79 章：响应式布局与 WindowSizeClass" [ref=e111] [cursor=pointer]
+          - button "第 80 章：无障碍、Baseline Profile 与发布质量" [ref=e112] [cursor=pointer]
+        - generic [ref=e113]:
+          - heading "实践篇" [level=2] [ref=e114]
+          - button "第 81 章：实践篇总览：用真实接口完成一个小电商" [ref=e115] [cursor=pointer]
+          - button "第 82 章：网络层：Retrofit、kotlinx.serialization 与统一响应壳" [ref=e116] [cursor=pointer]
+          - button "第 83 章：电商首页：分类、轮播与分页商品流" [ref=e117] [cursor=pointer]
+          - button "第 84 章：商品详情：SKU 选择与评论分页" [ref=e118] [cursor=pointer]
+          - button "第 85 章：购物车：分组列表与三态处理" [ref=e119] [cursor=pointer]
+          - button "第 86 章：个人主页：地址、客服与最近下单" [ref=e120] [cursor=pointer]
+          - button "第 87 章：实践整合与验收清单" [ref=e121] [cursor=pointer]
+        - generic [ref=e122]:
+          - heading "附录" [level=2] [ref=e123]
+          - button "阶段项目：电商商城（任务书）" [ref=e124] [cursor=pointer]
+          - button "文档基线与审校规范" [ref=e125] [cursor=pointer]
+      - generic [ref=e126]:
+        - text: 学习文档 · 持续更新
+        - link "在 GitHub 上查看 ↗" [ref=e127] [cursor=pointer]:
+          - /url: https://github.com/xiehanff/compose-learning-docs
+    - main [ref=e128]:
+      - generic [ref=e129]:
+        - generic [ref=e130]:
+          - generic [ref=e131]: JETPACK COMPOSE
+          - link "编辑此页 ↗" [ref=e132] [cursor=pointer]:
+            - /url: https://github.com/xiehanff/compose-learning-docs/blob/main/00_%E5%AE%8C%E6%95%B4%E5%AD%A6%E4%B9%A0%E8%A7%84%E5%88%92.md
+        - article [ref=e133]:
+          - heading "Compose 完整学习规划（预备篇 + 第 1—87 章）" [level=1] [ref=e134]
+          - blockquote [ref=e135]:
+            - paragraph [ref=e136]:
+              - text: 基础篇（第 1—45 章）围绕开源示例工程
+              - link "xiehanff/compose_demo" [ref=e137] [cursor=pointer]:
+                - /url: https://github.com/xiehanff/compose_demo
+              - text: 展开：正文中出现的源码路径均出自该仓库，可对照阅读。学习也不必逐行依赖它——先完成预备篇，自建一个 Empty Activity 练习工程跟学即可，每章只解决一个主要问题；Flutter 对照统一使用 Dart 3 与现代 Flutter。
+            - paragraph [ref=e138]:
+              - text: 进阶篇（第 46—80 章）示例改用通用 API；实践篇（第 81—87 章）用真实 HTTP 接口完成小电商闭环。版本、平台边界、来源等级和验证范围见
+              - link "文档基线与审校规范" [ref=e139] [cursor=pointer]:
+                - /url: "#%E6%96%87%E6%A1%A3%E5%9F%BA%E7%BA%BF%E4%B8%8E%E5%AE%A1%E6%A0%A1%E8%A7%84%E8%8C%83.md"
+              - text: 。
+          - blockquote [ref=e140]:
+            - paragraph [ref=e141]:
+              - text: 代码边界提示：第 1—45 章的部分代码是示例工程（见上链接）节选，不保证在空工程直接复制运行；遇到
+              - code [ref=e142]: ComponentRegistry
+              - text: 、
+              - code [ref=e143]: DesignWidthScale
+              - text: 等项目专属符号，可按对应章节的说明重建最小结构。第 41—44 章之前遇到
+              - code [ref=e144]: .px
+              - text: /
+              - code [ref=e145]: .pxSp()
+              - text: 这类自定义单位，练习中暂用标准
+              - code [ref=e146]: .dp
+              - text: /
+              - code [ref=e147]: .sp
+              - text: 表达同一尺寸意图，完成适配章节后再决定是否实现。
+          - heading "先判断自己从哪里开始" [level=2] [ref=e148]
+          - heading "真正零基础" [level=3] [ref=e149]
+          - paragraph [ref=e150]: 如果你不清楚 JDK、Android SDK、Gradle、AGP、Sync 和 Build 的区别，先完成：
+          - list [ref=e151]:
+            - listitem [ref=e152]:
+              - link "预备篇 A：零基础环境准备与第一次构建" [ref=e153] [cursor=pointer]:
+                - /url: "#00A_%E9%9B%B6%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E4%B8%8E%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%9E%84%E5%BB%BA.md"
+            - listitem [ref=e154]:
+              - link "预备篇 B：Gradle 构建系统从入门到理解" [ref=e155] [cursor=pointer]:
+                - /url: "#00B_Gradle%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%90%86%E8%A7%A3.md"
+            - listitem [ref=e156]:
+              - link "预备篇 C：Gradle 构建报错定位与自救" [ref=e157] [cursor=pointer]:
+                - /url: "#00C_Gradle%E6%9E%84%E5%BB%BA%E6%8A%A5%E9%94%99%E5%AE%9A%E4%BD%8D%E4%B8%8E%E8%87%AA%E6%95%91.md"
+            - listitem [ref=e158]:
+              - link "预备篇 D：Kotlin 基础与 Compose 必读语法" [ref=e159] [cursor=pointer]:
+                - /url: "#00D_Kotlin%E5%9F%BA%E7%A1%80%E4%B8%8ECompose%E5%BF%85%E5%A4%87%E8%AF%AD%E6%B3%95.md"
+            - listitem [ref=e160]:
+              - link "预备篇 E：Android 项目、资源、生命周期与日志基础" [ref=e161] [cursor=pointer]:
+                - /url: "#00E_Android%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E5%9F%BA%E7%A1%80.md"
+          - paragraph [ref=e162]: 完成标准不是“看过”，而是：
+          - list [ref=e163]:
+            - listitem [ref=e164]: 模板 Compose 项目能在 Android Studio 和命令行构建；
+            - listitem [ref=e165]:
+              - text: 能使用
+              - code [ref=e166]: ./gradlew :app:assembleDebug --stacktrace --console=plain
+              - text: 复现失败；
+            - listitem [ref=e167]: 能解释第一个失败任务、第一条有效根因和构建工具版本；
+            - listitem [ref=e168]: 能区分构建失败、安装失败和运行时崩溃。
+            - listitem [ref=e169]: 能读懂 val/var、空安全、Lambda、data class、sealed 状态、委托和基础协程；
+            - listitem [ref=e170]: 能解释 Manifest、资源、Activity、ViewModel、Composition 与进程的关系。
+          - heading "已有 Android/Gradle 经验" [level=3] [ref=e171]
+          - paragraph [ref=e172]: 可以直接从第 1 章开始，但遇到构建、依赖或版本兼容问题时回到预备篇 B、C。
+          - heading "有 Flutter 经验" [level=3] [ref=e173]
+          - paragraph [ref=e174]: 每章的 Flutter/Dart 对照可以帮助迁移已有概念。没有 Flutter 经验的读者可以跳过对照部分，不影响 Compose 主线。
+          - heading "阅读顺序" [level=2] [ref=e175]
+          - paragraph [ref=e176]:
+            - text: 章节编号是推荐顺序，不是唯一学习路径。学习者应按“状态与布局”“导航与架构”“性能与发布”等能力组复习，并以每个阶段的验收项目检验是否能把 API 串成完整功能。各部分结束后的短实践见
+            - link "阶段实践案例" [ref=e177] [cursor=pointer]:
+              - /url: "#%E9%98%B6%E6%AE%B5%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B.md"
+            - text: ，用于把章节示例组合成一个可验收的小功能。
+          - heading "知识依赖关系" [level=3] [ref=e178]
+          - code [ref=e180]: 预备篇 00A—00E ↓ 第 1—20 章：入口、布局、文字图片、列表与滚动 ↓ 第 21—25 章：本地状态、重组、恢复、状态提升、副作用 ↓ 第 26—45 章：交互组件、导航状态、组件注册、设计稿适配 ↓ 第 46—67 章：重组进阶、动画、绘制、布局、手势、互操作 ↓ 第 68—73 章：架构、生命周期、导航、持久化与协程 ↓ 第 74—80 章：性能、测试、主题、Insets、响应式布局与无障碍 ↓ 第 81—87 章：实践篇，真实接口小电商最小闭环（网络层→首页→详情→购物车→个人主页→整合验收）
+          - paragraph [ref=e181]: 这是建议主线，不表示每章只依赖紧邻的上一章。第一次阅读时按编号前进；遇到“第 X 章详解”的进阶概念，先掌握本章明确解释的最小用法即可，读到目标章节再回来补齐。原项目中的导航在第 4—5 章先作基础介绍，第 31—35、71、71A 章再分别回看和扩展。
+          - heading "第一部分：入口与导航" [level=3] [ref=e182]
+          - list [ref=e183]:
+            - listitem [ref=e184]: MainActivity 与 setContent
+            - listitem [ref=e185]: Composable 函数
+            - listitem [ref=e186]: DemoTheme 与 MaterialTheme
+            - listitem [ref=e187]: NavHost 与路由导航
+            - listitem [ref=e188]: Lambda、点击回调与导航链路
+          - heading "第二部分：页面骨架与布局" [level=3] [ref=e189]
+          - list [ref=e190]:
+            - listitem [ref=e191]: Scaffold、TopAppBar 与内容 padding
+            - listitem [ref=e192]: Modifier 的本质、作用范围与调用顺序
+            - listitem [ref=e193]: Column、Row、Arrangement、Alignment 8A. FlowRow 与流式布局
+            - listitem [ref=e194]: Box、层叠布局与 Flutter Stack
+            - listitem [ref=e195]: Card、Surface 与容器组件
+          - heading "第三部分：文字、图片与尺寸" [level=3] [ref=e196]
+          - list [ref=e197]:
+            - listitem [ref=e198]: Text、TextStyle、FontWeight 与 lineHeight
+            - listitem [ref=e199]: Image、Painter、contentDescription 与 ContentScale
+            - listitem [ref=e200]: padding、size、fillMaxWidth 与 fillMaxSize
+            - listitem [ref=e201]: weight、Spacer 与 Flutter Expanded
+            - listitem [ref=e202]: RoundedCornerShape、background、clip 与 border
+          - heading "第四部分：列表与滚动" [level=3] [ref=e203]
+          - list [ref=e204]:
+            - listitem [ref=e205]: LazyColumn、item、items 与 itemsIndexed
+            - listitem [ref=e206]: key 与列表项身份
+            - listitem [ref=e207]: LazyVerticalGrid 与 GridCells
+            - listitem [ref=e208]: verticalScroll、horizontalScroll 与 rememberScrollState
+            - listitem [ref=e209]: Lazy 容器与普通滚动容器的选择
+          - heading "第五部分：状态与重组" [level=3] [ref=e210]
+          - list [ref=e211]:
+            - listitem [ref=e212]: remember、mutableStateOf 与状态委托
+            - listitem [ref=e213]: 重组的触发与执行边界
+            - listitem [ref=e214]: rememberSaveable 与状态恢复
+            - listitem [ref=e215]: 状态提升与单向数据流
+            - listitem [ref=e216]: SideEffect、LaunchedEffect 与业务副作用边界
+          - heading "第六部分：Material 交互组件" [level=3] [ref=e217]
+          - list [ref=e218]:
+            - listitem [ref=e219]: Button、IconButton 与 Icon 26A. TextField、OutlinedTextField 与输入状态 26B. Checkbox、Switch 与 Slider 选择控件
+            - listitem [ref=e220]: AlertDialog
+            - listitem [ref=e221]: ModalBottomSheet
+            - listitem [ref=e222]: SnackbarHostState、协程与 Snackbar
+            - listitem [ref=e223]: CircularProgressIndicator 与 LinearProgressIndicator
+          - heading "第七部分：导航栏、标签与多面板" [level=3] [ref=e224]
+          - list [ref=e225]:
+            - listitem [ref=e226]: NavigationBar 与 NavigationBarItem
+            - listitem [ref=e227]: TabRow 与 Tab
+            - listitem [ref=e228]: Compose 中模拟 IndexedStack
+            - listitem [ref=e229]: 页面切换时如何保留状态
+            - listitem [ref=e230]: 组件内部状态与导航状态
+          - heading "第八部分：数据注册结构" [level=3] [ref=e231]
+          - list [ref=e232]:
+            - listitem [ref=e233]: ComponentInfo 类及四个字段
+            - listitem [ref=e234]: "@Composable () -> Unit 作为可运行 UI 数据"
+            - listitem [ref=e235]: object ComponentRegistry
+            - listitem [ref=e236]: List、firstOrNull 与可空返回值
+            - listitem [ref=e237]: 添加新 Demo 的完整步骤
+          - heading "第九部分：设计稿适配" [level=3] [ref=e238]
+          - list [ref=e239]:
+            - listitem [ref=e240]: Density 的真实含义
+            - listitem [ref=e241]: CompositionLocalProvider 与 LocalDensity
+            - listitem [ref=e242]: DesignWidthScale 如何影响子树
+            - listitem [ref=e243]: .px 与 .pxSp() 扩展
+            - listitem [ref=e244]: 与 Flutter 设计稿适配的比较、风险与建议
+          - heading "固定章节结构" [level=2] [ref=e245]
+          - paragraph [ref=e246]: 每章包含：本章目标、项目中的位置、源码片段、逐步解释、实际执行过程、Flutter/Dart 3 对照、常见错误、检查题和总结。
+          - paragraph [ref=e247]: 阅读时不要只背检查题。每章至少完成以下闭环：
+          - list [ref=e248]:
+            - listitem [ref=e249]: 把示例放进可运行工程；
+            - listitem [ref=e250]: 先预测运行结果，再执行；
+            - listitem [ref=e251]: 主动制造一个本章“常见错误”；
+            - listitem [ref=e252]: 根据编译日志或界面行为定位原因；
+            - listitem [ref=e253]: 修复后使用相同命令重新验证。
+          - paragraph [ref=e254]:
+            - text: 每个章节部分结束后，再完成一次短实践。案例按章节分组，提供场景、任务和通过标准，不重复完整代码讲解；详见
+            - link "阶段实践案例" [ref=e255] [cursor=pointer]:
+              - /url: "#%E9%98%B6%E6%AE%B5%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B.md"
+            - text: 。
+          - separator [ref=e256]
+          - heading "进阶篇（第 46—80 章）" [level=2] [ref=e257]
+          - blockquote [ref=e258]:
+            - paragraph [ref=e259]: 目标：把学习者从中级带到高级 Compose Android 开发。 第 46—80 章不再绑定示例工程，改用通用 API 示例，但保持同一套章节结构。
+          - heading "阅读顺序" [level=2] [ref=e260]
+          - heading "第十部分：深入状态与重组引擎" [level=3] [ref=e261]
+          - list [ref=e262]:
+            - listitem [ref=e263]: 重组的跳过机制与位置记忆
+            - listitem [ref=e264]: 稳定性（Stability）与强跳过模式
+            - listitem [ref=e265]: derivedStateOf：派生状态
+            - listitem [ref=e266]: rememberUpdatedState 与 rememberCoroutineScope
+            - listitem [ref=e267]: snapshotFlow 与 Flow 数据接入
+          - heading "第十一部分：动画体系" [level=3] [ref=e268]
+          - list [ref=e269]:
+            - listitem [ref=e270]: animate*AsState 与 Tween 基础动画
+            - listitem [ref=e271]: Animatable 与手动动画控制
+            - listitem [ref=e272]: AnimatedVisibility、AnimatedContent 与 Crossfade
+            - listitem [ref=e273]: updateTransition 多状态动画编排
+            - listitem [ref=e274]: 动画规格：spring、keyframes、repeatable 与 easing
+            - listitem [ref=e275]: rememberInfiniteTransition 与无限动画
+          - heading "第十二部分：自定义绘制" [level=3] [ref=e276]
+          - list [ref=e277]:
+            - listitem [ref=e278]: Canvas 与 DrawScope 基础
+            - listitem [ref=e279]: drawBehind、drawWithContent 与 drawWithCache
+            - listitem [ref=e280]: Path、贝塞尔曲线与裁剪
+            - listitem [ref=e281]: Brush、Shader 与渐变
+            - listitem [ref=e282]: 富文本：AnnotatedString、Span 与文本绘制
+          - heading "第十三部分：自定义布局与手势" [level=3] [ref=e283]
+          - list [ref=e284]:
+            - listitem [ref=e285]: 自定义 Layout：measure 与 place
+            - listitem [ref=e286]: Constraints 与固有尺寸测量
+            - listitem [ref=e287]: 自定义 Modifier：layout、draw、pointerInput
+            - listitem [ref=e288]: 手势检测：pointerInput 与手势探测器
+            - listitem [ref=e289]: 手势冲突与嵌套滚动
+            - listitem [ref=e290]: AndroidView 与 ComposeView：与 View 体系互操作
+          - heading "第十四部分：架构、导航与数据" [level=3] [ref=e291]
+          - list [ref=e292]:
+            - listitem [ref=e293]: ViewModel、StateFlow 与 UDF 单向数据流
+            - listitem [ref=e294]: Hilt 依赖注入
+            - listitem [ref=e295]: 生命周期感知：repeatOnLifecycle 与 LifecycleEventEffect
+            - listitem [ref=e296]: 导航进阶：嵌套导航图与类型安全导航 71A. Navigation 3 与 NavDisplay
+            - listitem [ref=e297]: 状态持久化：rememberSaveable、DataStore 与 Room 的边界
+            - listitem [ref=e298]: 协程进阶：Dispatchers、结构化并发与 Flow 操作符
+          - heading "第十五部分：性能、测试与发布" [level=3] [ref=e299]
+          - list [ref=e300]:
+            - listitem [ref=e301]: 性能分析：Layout Inspector 与编译器报告
+            - listitem [ref=e302]: Lazy 列表性能优化
+            - listitem [ref=e303]: Compose UI 测试：语义树与交互测试
+            - listitem [ref=e304]: 主题进阶：动态取色、Shape 与 Typography
+            - listitem [ref=e305]: 边缘到边缘与 Window Insets
+            - listitem [ref=e306]: 响应式布局与 WindowSizeClass
+            - listitem [ref=e307]: 无障碍、Baseline Profile 与发布质量
+            - listitem [ref=e308]: 实践篇总览与最小闭环
+            - listitem [ref=e309]: 网络层：Retrofit、kotlinx.serialization 与统一响应壳
+            - listitem [ref=e310]: 电商首页：分类、轮播与分页商品流
+            - listitem [ref=e311]: 商品详情：SKU 选择与评论分页
+            - listitem [ref=e312]: 购物车：分组列表与三态处理
+            - listitem [ref=e313]: 个人主页：地址与客服
+            - listitem [ref=e314]: 实践整合与验收清单
+          - heading "平台边界与工程闭环" [level=2] [ref=e315]
+          - paragraph [ref=e316]: 本规划面向 Android Jetpack Compose。学习者需要额外补齐真实项目通常会遇到、但本仓库没有展开成完整章节的内容：模块化、国际化/RTL、表单焦点与 IME、崩溃和 ANR 监控。网络请求、DTO 与分页原属此列，现已由实践篇（第 81—87 章）以真实接口小项目展开；Repository 多层抽象、模块化等工程化议题仍留给读者在真实项目中补齐。第 68—80 章后的综合项目会把适合本课程的内容作为验收约束；单个 API 示例不应被当作生产方案。
+          - paragraph [ref=e317]: 第 45 章后先完成基础篇阶段验收：使用第 1—45 章学过的布局、导航、本地状态、表单、状态恢复和设计稿适配，随界面一起检查已学的内容 padding 与图片语义。工程化和综合质量验收安排在第 68—80 章学习后。
+          - paragraph [ref=e318]:
+            - text: 进入进阶篇后，按 46—67、68—73、74—80 章逐步扩展练习。完成第 80 章后，可以跟做实践篇（第 81—87 章）的小电商闭环，再做
+            - link "阶段项目：电商商城" [ref=e319] [cursor=pointer]:
+              - /url: "#%E9%98%B6%E6%AE%B5%E9%A1%B9%E7%9B%AE_%E7%94%B5%E5%95%86%E5%95%86%E5%9F%8E.md"
+            - text: 独立验收——同一个商城，任务书要求脱离教程完成并叠加质量验收。
+          - heading "进阶篇学习建议" [level=2] [ref=e320]
+          - list [ref=e321]:
+            - listitem [ref=e322]: 46—50 章是地基：不理解重组与稳定性，后续性能章节无从谈起。
+            - listitem [ref=e323]: 51—56 章动画建议配合真机运行观察曲线差异；57—61 章绘制建议动手改参数观察效果。
+            - listitem [ref=e324]: 62—67 章是「框架边界」：自定义布局、手势与互操作决定了你能走多远。
+            - listitem [ref=e325]: 68—73 章进入工程化：架构、注入、生命周期与数据层，是进阶与高级的分水岭。
+            - listitem [ref=e326]: 74—80 章是「高级」的验收标准：能测量、能优化、能测试、能发布。
+            - listitem [ref=e327]: 81—87 章是实践篇：不再讲新 API，而是把前 80 章的能力串成产品——建议严格按章序完成完整闭环，每章末尾的验收标准全部通过再前进。
+          - heading "阶段验收建议" [level=2] [ref=e328]
+          - heading "第 1—20 章后" [level=3] [ref=e329]
+          - paragraph [ref=e330]: 独立完成一个静态组件展示页，包含文字、图片、列表、网格和滚动，并能解释 Modifier 顺序。
+          - heading "第 21—45 章后" [level=3] [ref=e331]
+          - paragraph [ref=e332]: 独立完成一个有状态的多页面 Demo，包含表单状态、弹窗、Snackbar、导航、状态恢复和一项设计稿适配；至少为一个错误场景保留复现记录。
+          - heading "第 46—67 章后" [level=3] [ref=e333]
+          - paragraph [ref=e334]: 独立完成一个包含动画、自定义绘制或自定义布局的组件，并验证交互、测量和视觉结果符合预期。性能工具与基准测量安排在第 74—75 章学习后。
+          - heading "第 68—80 章后" [level=3] [ref=e335]
+          - paragraph [ref=e336]:
+            - text: 完成
+            - link "阶段项目：电商商城" [ref=e337] [cursor=pointer]:
+              - /url: "#%E9%98%B6%E6%AE%B5%E9%A1%B9%E7%9B%AE_%E7%94%B5%E5%95%86%E5%95%86%E5%9F%8E.md"
+            - text: ，具备网络层、分页列表、详情 SKU、可变集合与导航整合的完整闭环；至少两条覆盖关键用户流程的 Compose UI 测试；无障碍和发布验收按任务书逐项检查，性能结论须基于可复现的基准数据。
+          - heading "第 81—87 章（实践篇）" [level=3] [ref=e338]
+          - paragraph [ref=e339]: 完成实践篇后，你应能独立完成「网络层 → 分页列表 → 详情/SKU → 可变集合 → 信息聚合 → 导航整合」的完整闭环：用 Retrofit 接真实 HTTP 接口并处理统一响应壳，首页分页/筛选/下拉刷新可用，商品详情 SKU 匹配与评论分页正确，购物车增删改与三态处理打真实接口，底部导航与角标联动；替换 mock 为任意真实后端时，能说清 BASE_URL、DTO、响应壳与鉴权各要改什么。
+          - heading "进阶篇固定章节结构" [level=2] [ref=e340]
+          - paragraph [ref=e341]: 与基础篇一致：本章目标、项目中的位置（通用 API 说明）、源码片段、逐步解释、实际执行过程、Flutter/Dart 3 对照、常见错误、检查题和总结。
+        - navigation "章节导航" [ref=e342]:
+          - button "下一章节 → 预备篇 A：零基础环境准备与第一次构建" [ref=e344] [cursor=pointer]:
+            - generic [ref=e345]: 下一章节 →
+            - generic [ref=e346]: 预备篇 A：零基础环境准备与第一次构建
+        - generic [ref=e347]:
+          - generic [ref=e348]: 本文档面向 Android Jetpack Compose
+          - link "GitHub ↗" [ref=e349] [cursor=pointer]:
+            - /url: https://github.com/xiehanff/compose-learning-docs

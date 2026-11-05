@@ -1,6 +1,7 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, nextTick, reactive, ref, watch } from 'vue'
 import MarkdownIt from 'markdown-it'
+import mermaid from 'mermaid'
 import markdownItAnchor from 'markdown-it-anchor'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
@@ -144,6 +145,20 @@ function renderMarkdown(content, doc) {
   })
   return md.render(source, { doc }).replace(/<p>@@MATH(\d+)@@<\/p>/g, (_, index) => `<div class="math-display">${math[Number(index)]}</div>`)
 }
+mermaid.initialize({ startOnLoad: false, theme: 'neutral', fontFamily: 'inherit', flowchart: { curve: 'basis' } })
+const defaultFence = md.renderer.rules.fence!.bind(md)
+md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+  const token = tokens[idx]
+  if (token.info.trim().split(/\s+/)[0] === 'mermaid') {
+    return `<div class="mermaid">${md.utils.escapeHtml(token.content)}</div>`
+  }
+  return defaultFence(tokens, idx, options, env, self)
+}
+watch(rendered, async () => {
+  await nextTick()
+  const nodes = document.querySelectorAll('.mermaid:not([data-processed])')
+  if (nodes.length) mermaid.run({ nodes, suppressErrors: true }).catch(() => {})
+})
 md.core.ruler.push('book_callouts', (state) => {
   const labels = { NOTE: '提示', TIP: '建议', IMPORTANT: '重点', WARNING: '注意', CAUTION: '警告' }
   for (let i = 0; i < state.tokens.length; i++) {

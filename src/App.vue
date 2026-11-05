@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, reactive, ref, watch } from 'vue'
+import { computed, onMounted, onUpdated, reactive, ref } from 'vue'
 import MarkdownIt from 'markdown-it'
 import mermaid from 'mermaid'
 import markdownItAnchor from 'markdown-it-anchor'
@@ -154,11 +154,6 @@ md.renderer.rules.fence = (tokens, idx, options, env, self) => {
   }
   return defaultFence(tokens, idx, options, env, self)
 }
-watch(rendered, async () => {
-  await nextTick()
-  const nodes = document.querySelectorAll('.mermaid:not([data-processed])')
-  if (nodes.length) mermaid.run({ nodes, suppressErrors: true }).catch(() => {})
-})
 md.core.ruler.push('book_callouts', (state) => {
   const labels = { NOTE: '提示', TIP: '建议', IMPORTANT: '重点', WARNING: '注意', CAUTION: '警告' }
   for (let i = 0; i < state.tokens.length; i++) {
@@ -210,6 +205,13 @@ const rendered = computed(() => {
   const content = activeDocKey.value ? contentById[activeDocKey.value] : ''
   return content && active.value ? renderMarkdown(content, active.value) : ''
 })
+async function renderMermaidBlocks() {
+  const nodes = document.querySelectorAll('.mermaid:not([data-processed])')
+  if (nodes.length) mermaid.run({ nodes, suppressErrors: true }).catch((e) => console.error('mermaid run failed:', e))
+}
+onMounted(renderMermaidBlocks)
+onUpdated(renderMermaidBlocks)
+
 function activateDoc(doc, scrollToTop = true) {
   if (doc.book !== activeBookSlug.value) query.value = ''
   activeBookSlug.value = doc.book

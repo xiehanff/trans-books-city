@@ -105,10 +105,6 @@ async function loadDoc(doc) {
     const pending = doc.load()
       .then((content) => {
         contentById[key] = content
-        // 部分文件以“第 X 部分”扉页开头，加载后优先用章级标题作导航名称。
-        const chapter = content.match(/^#{1,4}[ \t]+第\s*[0-9]+\s*章[^\n]*$|^#{1,4}[ \t]+导言[^\n]*$/m)?.[0]
-        const title = (chapter || content.match(/^#\s+(.+)$/m)?.[1] || doc.title).replace(/^#{1,4}[ \t]+/, '').replace(/`/g, '')
-        doc.title = title
         return content
       })
       .catch((error) => {

@@ -9,3 +9,11 @@
 @media(max-width:800px){.topbar{padding:0 15px}.menu-toggle{display:block}.edition{display:none}.sidebar{transform:translateX(-100%);transition:transform .2s;box-shadow:none}.sidebar.sidebar-open{transform:translateX(0);box-shadow:8px 0 24px #1b273314}.main{margin-left:0}.article-wrap{padding:32px 22px}.markdown-body h1{font-size:28px}.top-actions{gap:0}.markdown-body table{display:block}.home-wrap{padding:32px 22px}.home-hero h1{font-size:28px}.book-grid{grid-template-columns:1fr}}
 
 .article-status{min-height:240px;padding:28px 0;color:#858b94}.article-error{display:flex;align-items:center;gap:12px;color:#a23b2c}.article-error button{border:1px solid var(--line);border-radius:5px;background:#fff;padding:5px 10px;color:#52575f;cursor:pointer}.article-error button:hover{border-color:#fe9a78;color:var(--accent)}
+
+/* Mermaid 图表 */
+.markdown-body .mermaid {
+  margin: 1.5rem auto;
+  padding: 0.75rem;
+  text-align: center;
+  overflow-x: auto;
+}

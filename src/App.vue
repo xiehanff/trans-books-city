@@ -146,7 +146,7 @@ function renderMarkdown(content, doc) {
   return md.render(source, { doc }).replace(/<p>@@MATH(\d+)@@<\/p>/g, (_, index) => `<div class="math-display">${math[Number(index)]}</div>`)
 }
 mermaid.initialize({ startOnLoad: false, theme: 'neutral', fontFamily: 'inherit', flowchart: { curve: 'basis' } })
-const defaultFence = md.renderer.rules.fence!.bind(md)
+const defaultFence = md.renderer.rules.fence.bind(md)
 md.renderer.rules.fence = (tokens, idx, options, env, self) => {
   const token = tokens[idx]
   if (token.info.trim().split(/\s+/)[0] === 'mermaid') {

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="960" viewBox="0 0 720 960" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="44" y1="18" x2="674" y2="944" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10294B"/>
+      <stop offset=".52" stop-color="#081323"/>
+      <stop offset="1" stop-color="#071C26"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(420 370 -390 443 93 125)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2679B6" stop-opacity=".48"/>
+      <stop offset="1" stop-color="#2679B6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="94" y1="0" x2="245" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3E9BFF"/>
+      <stop offset="1" stop-color="#62E0C3"/>
+    </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" stroke="#B7D3E8" stroke-opacity=".055"/>
+    </pattern>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h720v960H0z"/>
+  <path fill="url(#glow)" d="M0 0h720v960H0z"/>
+  <path fill="url(#grid)" d="M0 0h720v960H0z"/>
+  <rect x="58" y="55" width="350" height="47" rx="23.5" stroke="#A9C5DC" stroke-opacity=".42"/>
+  <text x="82" y="85" fill="#D4E7F6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" letter-spacing="3">STANFORD CS329Z · 中文教程</text>
+  <text x="570" y="84" fill="#79D8CD" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="2">AI AGENTS</text>
+  <g stroke="#5B8FB9" stroke-opacity=".62" stroke-width="2">
+    <path d="m420 205 105-54 111 74-19 130-121 47-105-76 29-121Z"/>
+    <path d="m420 205 97 197 123-177M525 151l-10 251M391 326l230 29"/>
+    <path d="m468 534 105-60 89 67-26 114-115 34-91-72 38-83Z" stroke-opacity=".36"/>
+    <path d="m468 534 55 155 139-148M573 474l-52 215M430 617l206 38" stroke-opacity=".36"/>
+  </g>
+  <g fill="#081323" stroke="#72D9CF" stroke-width="3">
+    <circle cx="420" cy="205" r="11"/><circle cx="525" cy="151" r="13"/><circle cx="636" cy="225" r="12"/>
+    <circle cx="617" cy="355" r="11"/><circle cx="496" cy="402" r="13"/><circle cx="391" cy="326" r="11"/>
+    <circle cx="468" cy="534" r="9"/><circle cx="573" cy="474" r="10"/><circle cx="662" cy="541" r="9"/>
+    <circle cx="636" cy="655" r="9"/><circle cx="521" cy="689" r="10"/><circle cx="430" cy="617" r="9"/>
+  </g>
+  <g fill="#A7C9E0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="1">
+    <text x="444" y="185">MEMORY</text><text x="549" y="143">TOOLS</text><text x="570" y="426">EVALS</text>
+  </g>
+  <text x="58" y="554" fill="#80D9D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" font-weight="700" letter-spacing="4">ENGINEERING AI AGENTS</text>
+  <text x="52" y="663" fill="#F4F8FF" font-family="Arial, Helvetica, sans-serif" font-size="106" font-weight="800" letter-spacing="-5">CS329Z</text>
+  <text x="60" y="716" fill="#DCE9F5" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="600">AI Agent 系统工程</text>
+  <path d="M60 751h151" stroke="url(#accent)" stroke-width="6" stroke-linecap="round"/>
+  <text x="60" y="802" fill="#B7C8D9" font-family="Arial, Helvetica, sans-serif" font-size="19">从 LLM、RAG 到多智能体、评测与安全</text>
+  <text x="60" y="914" fill="#91A9BF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3">TRANS-BOOKS.CITY</text>
+  <text x="452" y="914" fill="#647F98" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="1">SYSTEM · DATA · EVALS</text>
+</svg>

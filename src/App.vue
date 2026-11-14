@@ -37,6 +37,7 @@ import coverCraftingInterpreters from './assets/covers/crafting-interpreters.jpg
 import coverHelloAlgo from './assets/covers/hello-algo.jpg'
 import coverDiyLlm from './assets/covers/diy-llm.jpg'
 import coverStanfordAi from './assets/covers/stanford-ai-course.jpg'
+import coverCs329z from './assets/covers/cs329z-course.svg'
 import coverCNotes from './assets/covers/c-notes.jpg'
 import coverCppNotes from './assets/covers/cpp-notes.jpg'
 import coverPython from './assets/covers/python-tutorial.jpg'
@@ -85,7 +86,7 @@ const BOOKS = [
     kind: '中文教程',
     label: 'ENGINEERING AI AGENTS',
     author: 'wanghao-SunSky',
-    cover: coverStanfordAi,
+    cover: coverCs329z,
     desc: '斯坦福 CS329Z 中文教程，19 讲与 4 项实践，涵盖 LLM、RAG、工具调用、Agent 记忆、多智能体、评测与安全。',
     category: 'ai',
   },

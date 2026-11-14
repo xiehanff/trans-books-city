@@ -40,6 +40,8 @@ import coverStanfordAi from './assets/covers/stanford-ai-course.jpg'
 import coverCNotes from './assets/covers/c-notes.jpg'
 import coverCppNotes from './assets/covers/cpp-notes.jpg'
 import coverPython from './assets/covers/python-tutorial.jpg'
+import coverModernOs from './assets/covers/modern-os.jpg'
+import coverDdia from './assets/covers/ddia.jpg'
 import coverAiMath from './assets/covers/ai-prereq-math.jpg'
 import coverAiNn from './assets/covers/ai-prereq-nn.jpg'
 import coverAiNanogpt from './assets/covers/ai-prereq-nanogpt.jpg'
@@ -51,46 +53,6 @@ import coverAlgorithmDesignManual from './assets/covers/algorithm-design-manual.
 
 const REPO = 'https://github.com/xiehanff/trans-books-city'
 const BOOKS = [
-  {
-    slug: 'computer-systems-3e',
-    title: 'Computer Systems: A Programmer’s Perspective',
-    zh: '深入理解计算机系统（原书第 3 版）',
-    label: 'COMPUTER SYSTEMS',
-    author: 'Randal E. Bryant / David R. O’Hallaron',
-    cover: coverCsapp,
-    category: 'cs101',
-    desc: '从程序表示与执行，到链接、异常控制流、虚拟内存、网络与并发，系统理解计算机系统的软硬件基础。',
-  },
-  {
-    slug: 'operating-systems-three-easy-pieces',
-    title: 'Operating Systems: Three Easy Pieces',
-    zh: '操作系统导论',
-    label: 'OPERATING SYSTEMS',
-    author: 'Remzi H. Arpaci-Dusseau / Andrea C. Arpaci-Dusseau',
-    cover: coverOstep,
-    category: 'cs101',
-    desc: '以虚拟化、并发、持久性三大主题贯穿进程、调度、内存、文件系统与分布式，对话式讲解操作系统核心原理。',
-  },
-  {
-    slug: 'structure-and-interpretation-of-computer-programs',
-    title: 'Structure and Interpretation of Computer Programs',
-    zh: '计算机程序的构造和解释（第 2 版）',
-    label: 'SICP',
-    author: 'Harold Abelson / Gerald Jay Sussman / Julie Sussman',
-    cover: coverSicp,
-    category: 'cs101',
-    desc: '用 Scheme 讲透过程抽象、数据抽象、模块化与元语言抽象，程序设计的经典之作，裘宗燕译本。',
-  },
-  {
-    slug: 'computer-networking-top-down-6e',
-    title: 'Computer Networking: A Top-Down Approach',
-    zh: '计算机网络：自顶向下方法（原书第 6 版）',
-    label: 'COMPUTER NETWORKING',
-    author: 'James F. Kurose / Keith W. Ross',
-    cover: coverComputerNetworking,
-    category: 'cs101',
-    desc: '从应用层一路向下，讲透运输层、网络层与链路层，配 Wireshark 实验与编程作业的自顶向下网络经典教材。',
-  },
   {
     slug: 'diy-llm',
     title: 'CS336',
@@ -182,7 +144,74 @@ const AI_PREREQ_BOOKS = [
     category: 'ai-prereq',
   },
 ]
+
 const EXTERNAL_BOOKS = [
+  {
+    slug: 'csapp-3e-pdf',
+    title: 'Computer Systems: A Programmer’s Perspective',
+    zh: '深入理解计算机系统（原书第 3 版）',
+    cover: coverCsapp,
+    desc: '从程序表示与执行，到链接、异常控制流、虚拟内存、网络与并发，系统理解计算机系统的软硬件基础。',
+    meta: '原书第 3 版 · 775 页 · 站内 PDF',
+    url: 'books/pdf/csapp-3e.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
+    slug: 'ostep-pdf',
+    title: 'Operating Systems: Three Easy Pieces',
+    zh: '操作系统导论',
+    cover: coverOstep,
+    desc: '以虚拟化、并发、持久性三大主题贯穿进程、调度、内存、文件系统与分布式，对话式讲解操作系统核心原理。',
+    meta: '500 页 · 站内 PDF',
+    url: 'books/pdf/ostep.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
+    slug: 'sicp-2e-pdf',
+    title: 'Structure and Interpretation of Computer Programs',
+    zh: '计算机程序的构造和解释（原书第 2 版·典藏版）',
+    cover: coverSicp,
+    desc: '用 Scheme 讲透过程抽象、数据抽象、模块化与元语言抽象，程序设计的经典之作，裘宗燕译本。',
+    meta: '典藏版 · 489 页 · 站内 PDF',
+    url: 'books/pdf/sicp-2e.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
+    slug: 'computer-networking-top-down-6e-pdf',
+    title: 'Computer Networking: A Top-Down Approach',
+    zh: '计算机网络：自顶向下方法（原书第 6 版）',
+    cover: coverComputerNetworking,
+    desc: '从应用层一路向下，讲透运输层、网络层与链路层，配 Wireshark 实验与编程作业的自顶向下网络经典教材。',
+    meta: '原书第 6 版 · 570 页 · 站内 PDF',
+    url: 'books/pdf/computer-networking-top-down-6e.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
+    slug: 'modern-operating-systems-3e-pdf',
+    title: 'Modern Operating Systems',
+    zh: '现代操作系统（原书第 3 版）',
+    cover: coverModernOs,
+    desc: '从进程、内存、文件系统到死锁、虚拟化与分布式系统，Tanenbaum 的操作系统经典教材。',
+    meta: '原书第 3 版 · 2071 页 · 站内 PDF',
+    url: 'books/pdf/modern-operating-systems-3e.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
+    slug: 'ddia-pdf',
+    title: 'Designing Data-Intensive Applications',
+    zh: '数据密集型应用系统设计',
+    cover: coverDdia,
+    desc: '从可靠性、可扩展性、可维护性出发，讲透数据模型、存储引擎、复制、分区、事务与流处理。',
+    meta: '赵军平等译 · 522 页 · 站内 PDF',
+    url: 'books/pdf/ddia.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
   {
     slug: 'algorithm-design-manual-pdf',
     title: 'The Algorithm Design Manual',
@@ -601,8 +630,8 @@ window.addEventListener('keydown', (event) => {
 <template>
   <header class="topbar">
     <button class="menu-toggle" aria-label="切换目录" @click="menuOpen = !menuOpen">☰</button>
-    <a class="brand" href="#" @click.prevent="goHome"><span class="brand-mark">T</span><span>Trans Books City</span></a>
-    <div class="top-actions"><span class="edition">中文译本与教程 · 精选技术书籍</span><a :href="REPO" target="_blank" rel="noreferrer" aria-label="GitHub">GitHub ↗</a></div>
+    <a class="brand" href="#" @click.prevent="goHome"><span class="brand-mark">C</span><span>CSBookCity</span></a>
+    <div class="top-actions"><span class="edition">计算机基础 · 编程语言 · AI</span><a :href="REPO" target="_blank" rel="noreferrer" aria-label="GitHub">GitHub ↗</a></div>
   </header>
   <main v-if="pdfPath" class="pdf-page">
     <div class="pdf-toolbar">
@@ -625,6 +654,11 @@ window.addEventListener('keydown', (event) => {
       <div v-show="!pdfError" class="pdf-canvas-wrap" ref="pdfWrap">
         <canvas ref="pdfCanvas"></canvas>
       </div>
+      <div v-show="!pdfError && !pdfLoading" class="pdf-bottom">
+        <button type="button" @click="pdfPrev" :disabled="pdfPage <= 1">← 上一页</button>
+        <span>第 {{ pdfPage }} / {{ pdfTotal || '—' }} 页</span>
+        <button type="button" @click="pdfNext" :disabled="pdfPage >= pdfTotal">下一页 →</button>
+      </div>
     </div>
   </main>
   <main v-else-if="codePath" class="code-page">
@@ -642,7 +676,7 @@ window.addEventListener('keydown', (event) => {
   <main v-else-if="!activeBook" class="home">
     <div class="home-wrap">
       <section class="home-hero">
-        <h1>Trans Books City</h1>
+        <h1>CSBookCity</h1>
         <p>{{ totalBooks }} 个精选技术书籍与开源课程。本站内书籍逐章整理评审，站外译本与开源教程直达独立站点。</p>
       </section>
       <section v-for="category in CATEGORIES" :key="category.key" class="book-section">

@@ -38,6 +38,7 @@ import coverDiyLlm from './assets/covers/diy-llm.jpg'
 import coverStanfordAi from './assets/covers/stanford-ai-course.jpg'
 import coverCNotes from './assets/covers/c-notes.jpg'
 import coverCppNotes from './assets/covers/cpp-notes.jpg'
+import coverPython from './assets/covers/python-tutorial.jpg'
 import coverAiMath from './assets/covers/ai-prereq-math.jpg'
 import coverAiNn from './assets/covers/ai-prereq-nn.jpg'
 import coverAiNanogpt from './assets/covers/ai-prereq-nanogpt.jpg'
@@ -218,6 +219,16 @@ const EXTERNAL_BOOKS = [
     desc: '系统讲解 C++ 语法、类与对象、继承、多态、模板与 STL 的免费教程，适合从 C 语言过渡到现代 C++。',
     meta: 'learncpp.com · 站外教程',
     url: 'https://www.learncpp.com/',
+    category: 'programming',
+  },
+  {
+    slug: 'python-tutorial',
+    title: 'Python',
+    zh: '官方教程 · 从语法到标准库',
+    cover: coverPython,
+    desc: 'Python 官方教程：解释器、数据类型、控制流、函数、模块、异常、类与标准库；适合有其他语言基础的学习者。',
+    meta: 'docs.python.org · 中文官方教程',
+    url: 'https://docs.python.org/zh-cn/3/tutorial/index.html',
     category: 'programming',
   },
 ]

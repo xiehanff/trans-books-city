@@ -17,3 +17,7 @@
   text-align: center;
   overflow-x: auto;
 }
+
+/* 站外译本入口 */
+.book-card-external .book-meta{color:var(--accent)}
+.book-external{font-size:13px;line-height:1}

@@ -28,6 +28,8 @@ import coverCsapp from './assets/covers/csapp-third-edition.jpg'
 import coverOstep from './assets/covers/ostep.jpg'
 import coverSicp from './assets/covers/sicp-2e.jpg'
 import coverComputerNetworking from './assets/covers/computer-networking-top-down.jpg'
+import coverCraftingInterpreters from './assets/covers/crafting-interpreters.jpg'
+import coverHelloAlgo from './assets/covers/hello-algo.jpg'
 
 ;[['asm', x86asm], ['bash', bash], ['c', c], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
@@ -70,6 +72,27 @@ const BOOKS = [
     desc: '从应用层一路向下，讲透运输层、网络层与链路层，配 Wireshark 实验与编程作业的自顶向下网络经典教材。',
   },
 ]
+const EXTERNAL_BOOKS = [
+  {
+    slug: 'craftinginterpreters-zh',
+    title: 'Crafting Interpreters',
+    zh: '手撸解释器教程 · 中文译本',
+    cover: coverCraftingInterpreters,
+    desc: '用 Java 和 C 从零实现 Lox 语言的两种解释器：树遍历的 jlox 与字节码虚拟机 clox，一路做到垃圾回收与优化。',
+    meta: 'Robert Nystrom · 30 章 · 独立站点',
+    url: 'https://xiehanff.github.io/craftinginterpreters_zh/',
+  },
+  {
+    slug: 'hello-algo',
+    title: 'Hello 算法',
+    zh: '动画图解数据结构与算法教程',
+    cover: coverHelloAlgo,
+    desc: '动画图解、一键运行的数据结构与算法教程，从复杂度分析、数据结构到树、图与动态规划，附十余种语言的代码实现。',
+    meta: '靳宇栋 · 18 章 · 独立站点',
+    url: 'https://www.hello-algo.com/',
+  },
+]
+const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length
 
 const files = import.meta.glob('../books/*/*.md', { query: '?raw', import: 'default' })
 const docs = reactive(Object.entries(files)
@@ -267,7 +290,7 @@ window.addEventListener('keydown', (event) => {
     <div class="home-wrap">
       <section class="home-hero">
         <h1>Trans Books City</h1>
-        <p>{{ BOOKS.length }} 本精选技术书籍的中文版，译文经逐章评审与原书核对。</p>
+        <p>{{ totalBooks }} 本精选技术书籍与开源教程。本站内译本逐章评审并与原书核对，站外译本与开源教程直达独立站点。</p>
       </section>
       <section class="book-grid">
         <button v-for="book in BOOKS" :key="book.slug" class="book-card" @click="openBook(book)">
@@ -279,6 +302,23 @@ window.addEventListener('keydown', (event) => {
             <p class="book-meta">{{ book.author }} · {{ book.chapters.length }} 章</p>
           </div>
         </button>
+        <a
+          v-for="book in EXTERNAL_BOOKS"
+          :key="book.slug"
+          class="book-card book-card-external"
+          :href="book.url"
+          target="_blank"
+          rel="noreferrer"
+          :aria-label="`${book.zh}，在新窗口打开独立站点`"
+        >
+          <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
+          <div class="book-info">
+            <h2 class="book-title">{{ book.title }}</h2>
+            <p class="book-zh">{{ book.zh }}</p>
+            <p class="book-desc">{{ book.desc }}</p>
+            <p class="book-meta">{{ book.meta }} <span class="book-external">↗</span></p>
+          </div>
+        </a>
       </section>
       <footer class="home-foot">译本仅供学习交流，版权归原作者所有 · <a :href="REPO">在 GitHub 上查看 ↗</a></footer>
     </div>

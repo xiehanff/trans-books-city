@@ -127,6 +127,58 @@ const BOOKS = [
     category: 'programming',
   },
 ]
+const AI_PREREQ_BOOKS = [
+  {
+    slug: 'mml-book-zh',
+    step: '01',
+    title: 'Mathematics for Machine Learning',
+    zh: '机器学习数学基础 · 中文译本',
+    desc: '只读矩阵运算、链式法则与反向传播、高斯与期望方差、梯度下降四块，配套章末题；不必重学整门线代与微积分。',
+    meta: 'Datawhale 中文译本 · 官方 PDF 免费 · 约 30 小时',
+    url: 'https://github.com/datawhalechina/math-for-ai/',
+    category: 'ai-prereq',
+  },
+  {
+    slug: 'nn-zero-to-hero',
+    step: '02',
+    title: 'Neural Networks: Zero to Hero',
+    zh: '从零构建神经网络 · 手写反向传播',
+    desc: '用 micrograd 搭出 autograd 引擎，makemore 逐层手动反传，最后手写 GPT；直接对应 CS336 的 tokenization、架构与训练。',
+    meta: 'Andrej Karpathy · 6 讲 · 约 45 小时',
+    url: 'https://github.com/karpathy/nn-zero-to-hero',
+    category: 'ai-prereq',
+  },
+  {
+    slug: 'nanogpt-gpt2',
+    step: '03',
+    title: 'nanoGPT',
+    zh: 'Let’s reproduce GPT-2 (124M)',
+    desc: '四小时视频逐行写 causal attention、AdamW、warmup + cosine、混合精度与 checkpoint，再改造成 RMSNorm / RoPE / SwiGLU。',
+    meta: 'Andrej Karpathy · 视频与仓库 · 约 55 小时',
+    url: 'https://github.com/karpathy/nanoGPT',
+    category: 'ai-prereq',
+  },
+  {
+    slug: 'cuda-mode',
+    step: '04',
+    title: 'CUDA MODE',
+    zh: 'GPU 性能与 Triton 实战',
+    desc: '从 profiling、内存层级到 kernel 优化与 FlashAttention / Triton，边看边练，衔接 CS336 作业 2 的 kernel 与并行训练。',
+    meta: 'GPU MODE 社区 · 讲义与 Colab · 60–75 小时',
+    url: 'https://github.com/gpu-mode/lectures',
+    category: 'ai-prereq',
+  },
+  {
+    slug: 'cs336-assignments',
+    step: '05',
+    title: 'CS336 Assignments',
+    zh: '语言模型从零实现 · 官方作业',
+    desc: '作业 4 的 Common Crawl 清洗与 MinHash 去重、作业 5 的 SFT 与 GRPO / DPO 对齐，作业说明本身即教程，几乎不给脚手架。',
+    meta: 'Stanford · GitHub · 需 GPU 与数据磁盘',
+    url: 'https://github.com/stanford-cs336/assignment4-data',
+    category: 'ai-prereq',
+  },
+]
 const EXTERNAL_BOOKS = [
   {
     slug: 'craftinginterpreters-zh',
@@ -159,14 +211,17 @@ const EXTERNAL_BOOKS = [
     category: 'programming',
   },
 ]
-const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length
+const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length + AI_PREREQ_BOOKS.length
 const CATEGORIES = [
   { key: 'cs101', title: 'CS101', desc: '计算机基础' },
   { key: 'programming', title: '编程语言', desc: 'C / C++ 与系统底层' },
+  { key: 'ai-prereq', title: 'AI 前置', desc: '进入 CS336 前按顺序完成的五门课' },
   { key: 'ai', title: 'AI', desc: '人工智能与大模型' },
 ]
 const booksIn = (category) => BOOKS.filter((book) => book.category === category)
-const externalBooksIn = (category) => EXTERNAL_BOOKS.filter((book) => book.category === category)
+const externalBooksIn = (category) => category === 'ai-prereq'
+  ? AI_PREREQ_BOOKS
+  : EXTERNAL_BOOKS.filter((book) => book.category === category)
 
 const files = import.meta.glob('../books/*/*.md', { query: '?raw', import: 'default' })
 const docs = reactive(Object.entries(files)
@@ -480,7 +535,8 @@ window.addEventListener('keydown', (event) => {
             rel="noreferrer"
             :aria-label="`${book.zh}，在新窗口打开独立站点`"
           >
-            <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
+            <img v-if="book.cover" class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
+            <div v-else class="book-cover book-cover-step" aria-hidden="true"><span>{{ book.step }}</span></div>
             <div class="book-info">
               <h2 class="book-title">{{ book.title }}</h2>
               <p class="book-zh">{{ book.zh }}</p>

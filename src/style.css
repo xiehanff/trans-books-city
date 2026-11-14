@@ -20,6 +20,7 @@
 
 /* 站外译本入口 */
 .book-card-external .book-meta{color:var(--accent)}
+.book-cover-step{display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#fff6f1,#ffe7db);border-color:#f2d7c9;color:#c2532a;font:600 30px/1 system-ui,sans-serif;letter-spacing:.02em}
 .book-external{font-size:13px;line-height:1}
 
 /* 书籍插图与内联公式 */

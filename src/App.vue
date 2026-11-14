@@ -27,8 +27,8 @@ import xml from 'highlight.js/lib/languages/xml'
 import x86asm from 'highlight.js/lib/languages/x86asm'
 import yaml from 'highlight.js/lib/languages/yaml'
 import 'highlight.js/styles/github.css'
-import * as pdfjsLib from 'pdfjs-dist'
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
+import pdfWorker from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url'
 import coverCsapp from './assets/covers/csapp-third-edition.jpg'
 import coverOstep from './assets/covers/ostep.jpg'
 import coverSicp from './assets/covers/sicp-2e.jpg'
@@ -461,15 +461,23 @@ async function openPdf(path) {
   menuOpen.value = false
   if (pdfDoc) { try { await pdfDoc.destroy() } catch {} pdfDoc = null }
   try {
-    pdfDoc = await pdfjsLib.getDocument({ url: `${import.meta.env.BASE_URL}${path}` }).promise
+    pdfDoc = await pdfjsLib.getDocument({
+      url: `${import.meta.env.BASE_URL}${path}`,
+      isEvalSupported: false,
+      disableAutoFetch: true,
+    }).promise
     pdfTotal.value = pdfDoc.numPages
     await nextTick()
     await renderPdfPage(1)
-  } catch {
-    pdfError.value = 'PDF 加载失败，请下载原文件查看。'
+  } catch (error) {
+    console.error('PDF load failed:', error)
+    pdfError.value = 'PDF 加载失败，请重试或直接打开原文件。'
   } finally {
     pdfLoading.value = false
   }
+}
+function retryPdf() {
+  if (pdfPath.value) openPdf(pdfPath.value)
 }
 async function renderPdfPage(num) {
   if (!pdfDoc || !pdfCanvas.value) return
@@ -608,7 +616,11 @@ window.addEventListener('keydown', (event) => {
       <a :href="pdfRawHref" target="_blank" rel="noreferrer">下载原文件 ↗</a>
     </div>
     <div class="pdf-view">
-      <p v-if="pdfError" class="article-status article-error" role="alert">{{ pdfError }}</p>
+      <p v-if="pdfError" class="article-status article-error" role="alert">
+        <span>{{ pdfError }}</span>
+        <button type="button" @click="retryPdf">重试</button>
+        <a :href="pdfRawHref" target="_blank" rel="noreferrer">直接打开 PDF ↗</a>
+      </p>
       <p v-else-if="pdfLoading" class="article-status" role="status">正在加载 PDF…</p>
       <div v-show="!pdfError" class="pdf-canvas-wrap" ref="pdfWrap">
         <canvas ref="pdfCanvas"></canvas>

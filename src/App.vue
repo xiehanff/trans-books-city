@@ -42,6 +42,7 @@ import coverCppNotes from './assets/covers/cpp-notes.jpg'
 import coverPython from './assets/covers/python-tutorial.jpg'
 import coverModernOs from './assets/covers/modern-os.jpg'
 import coverDdia from './assets/covers/ddia.jpg'
+import coverAlgorithms4e from './assets/covers/algorithms-4e.jpg'
 import coverAiMath from './assets/covers/ai-prereq-math.jpg'
 import coverAiNn from './assets/covers/ai-prereq-nn.jpg'
 import coverAiNanogpt from './assets/covers/ai-prereq-nanogpt.jpg'
@@ -209,6 +210,17 @@ const EXTERNAL_BOOKS = [
     desc: '从可靠性、可扩展性、可维护性出发，讲透数据模型、存储引擎、复制、分区、事务与流处理。',
     meta: '赵军平等译 · 522 页 · 站内 PDF',
     url: 'books/pdf/ddia.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
+    slug: 'algorithms-4e-pdf',
+    title: 'Algorithms',
+    zh: '算法（第 4 版）',
+    cover: coverAlgorithms4e,
+    desc: '经典算法教材，覆盖排序、查找、图、字符串与算法分析，配套 Java 实现与可视化。',
+    meta: '原书第 4 版 · 678 页 · 站内 PDF',
+    url: 'books/pdf/algorithms-4e.pdf',
     category: 'cs101',
     pdf: true,
   },

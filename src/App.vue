@@ -43,6 +43,9 @@ import coverPython from './assets/covers/python-tutorial.jpg'
 import coverModernOs from './assets/covers/modern-os.jpg'
 import coverDdia from './assets/covers/ddia.jpg'
 import coverAlgorithms4e from './assets/covers/algorithms-4e.jpg'
+import coverDatabaseSystems from './assets/covers/database-system-concepts.jpg'
+import coverCodeComplete from './assets/covers/code-complete-2e.jpg'
+import coverCraftingZhPdf from './assets/covers/crafting-interpreters-zh.jpg'
 import coverAiMath from './assets/covers/ai-prereq-math.jpg'
 import coverAiNn from './assets/covers/ai-prereq-nn.jpg'
 import coverAiNanogpt from './assets/covers/ai-prereq-nanogpt.jpg'
@@ -236,6 +239,28 @@ const EXTERNAL_BOOKS = [
     pdf: true,
   },
   {
+    slug: 'database-system-concepts-7e-pdf',
+    title: 'Database System Concepts',
+    zh: '数据库系统概念（原书第 7 版）',
+    cover: coverDatabaseSystems,
+    desc: '从关系模型、SQL、事务与并发控制到存储、索引、查询处理与分布式数据库的系统教材。',
+    meta: '原书第 7 版 · 822 页 · 站内 PDF',
+    url: 'books/pdf/database-system-concepts-7e.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
+    slug: 'code-complete-2e-pdf',
+    title: 'Code Complete',
+    zh: '代码大全 2（第 2 版）',
+    cover: coverCodeComplete,
+    desc: '从变量、语句、子程序到重构、调试与软件构建实践，覆盖高质量代码的完整方法论。',
+    meta: '原书第 2 版 · 966 页 · 站内 PDF',
+    url: 'books/pdf/code-complete-2e.pdf',
+    category: 'cs101',
+    pdf: true,
+  },
+  {
     slug: 'craftinginterpreters-zh',
     title: 'Crafting Interpreters',
     zh: '手撸解释器教程 · 中文译本',
@@ -274,6 +299,17 @@ const EXTERNAL_BOOKS = [
     meta: 'docs.python.org · 中文官方教程',
     url: 'https://docs.python.org/zh-cn/3/tutorial/index.html',
     category: 'programming',
+  },
+  {
+    slug: 'crafting-interpreters-zh-pdf',
+    title: '自己动手实现解释器',
+    zh: '译自 Crafting Interpreters',
+    cover: coverCraftingZhPdf,
+    desc: '从扫描、解析到树遍历解释器与字节码虚拟机，用 Java 与 C 亲手实现 Lox 语言。',
+    meta: '左元 译 · 347 页 · 站内 PDF',
+    url: 'books/pdf/crafting-interpreters-zh.pdf',
+    category: 'programming',
+    pdf: true,
   },
 ]
 const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length + AI_PREREQ_BOOKS.length

@@ -46,7 +46,6 @@ import coverDdia from './assets/covers/ddia.jpg'
 import coverAlgorithms4e from './assets/covers/algorithms-4e.jpg'
 import coverDatabaseSystems from './assets/covers/database-system-concepts.jpg'
 import coverCodeComplete from './assets/covers/code-complete-2e.jpg'
-import coverCraftingZhPdf from './assets/covers/crafting-interpreters-zh.jpg'
 import coverAiMath from './assets/covers/ai-prereq-math.jpg'
 import coverAiNn from './assets/covers/ai-prereq-nn.jpg'
 import coverAiNanogpt from './assets/covers/ai-prereq-nanogpt.jpg'
@@ -310,17 +309,6 @@ const EXTERNAL_BOOKS = [
     meta: 'docs.python.org · 中文官方教程',
     url: 'https://docs.python.org/zh-cn/3/tutorial/index.html',
     category: 'programming',
-  },
-  {
-    slug: 'crafting-interpreters-zh-pdf',
-    title: '自己动手实现解释器',
-    zh: '译自 Crafting Interpreters',
-    cover: coverCraftingZhPdf,
-    desc: '从扫描、解析到树遍历解释器与字节码虚拟机，用 Java 与 C 亲手实现 Lox 语言。',
-    meta: '左元 译 · 347 页 · 站内 PDF',
-    url: 'books/pdf/crafting-interpreters-zh.pdf',
-    category: 'programming',
-    pdf: true,
   },
 ]
 const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length + AI_PREREQ_BOOKS.length

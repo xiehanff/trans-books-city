@@ -38,6 +38,11 @@ import coverDiyLlm from './assets/covers/diy-llm.jpg'
 import coverStanfordAi from './assets/covers/stanford-ai-course.jpg'
 import coverCNotes from './assets/covers/c-notes.jpg'
 import coverCppNotes from './assets/covers/cpp-notes.jpg'
+import coverAiMath from './assets/covers/ai-prereq-math.jpg'
+import coverAiNn from './assets/covers/ai-prereq-nn.jpg'
+import coverAiNanogpt from './assets/covers/ai-prereq-nanogpt.jpg'
+import coverAiCuda from './assets/covers/ai-prereq-cuda.jpg'
+import coverAiCs336 from './assets/covers/ai-prereq-cs336.jpg'
 
 ;[['asm', x86asm], ['bash', bash], ['c', c], ['cpp', cpp], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['lua', lua], ['makefile', makefile], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
@@ -131,6 +136,7 @@ const AI_PREREQ_BOOKS = [
   {
     slug: 'mml-book-zh',
     step: '01',
+    cover: coverAiMath,
     title: 'Mathematics for Machine Learning',
     zh: '机器学习数学基础 · 中文译本',
     desc: '只读矩阵运算、链式法则与反向传播、高斯与期望方差、梯度下降四块，配套章末题；不必重学整门线代与微积分。',
@@ -141,6 +147,7 @@ const AI_PREREQ_BOOKS = [
   {
     slug: 'nn-zero-to-hero',
     step: '02',
+    cover: coverAiNn,
     title: 'Neural Networks: Zero to Hero',
     zh: '从零构建神经网络 · 手写反向传播',
     desc: '用 micrograd 搭出 autograd 引擎，makemore 逐层手动反传，最后手写 GPT；直接对应 CS336 的 tokenization、架构与训练。',
@@ -151,6 +158,7 @@ const AI_PREREQ_BOOKS = [
   {
     slug: 'nanogpt-gpt2',
     step: '03',
+    cover: coverAiNanogpt,
     title: 'nanoGPT',
     zh: 'Let’s reproduce GPT-2 (124M)',
     desc: '四小时视频逐行写 causal attention、AdamW、warmup + cosine、混合精度与 checkpoint，再改造成 RMSNorm / RoPE / SwiGLU。',
@@ -161,6 +169,7 @@ const AI_PREREQ_BOOKS = [
   {
     slug: 'cuda-mode',
     step: '04',
+    cover: coverAiCuda,
     title: 'CUDA MODE',
     zh: 'GPU 性能与 Triton 实战',
     desc: '从 profiling、内存层级到 kernel 优化与 FlashAttention / Triton，边看边练，衔接 CS336 作业 2 的 kernel 与并行训练。',
@@ -171,6 +180,7 @@ const AI_PREREQ_BOOKS = [
   {
     slug: 'cs336-assignments',
     step: '05',
+    cover: coverAiCs336,
     title: 'CS336 Assignments',
     zh: '语言模型从零实现 · 官方作业',
     desc: '作业 4 的 Common Crawl 清洗与 MinHash 去重、作业 5 的 SFT 与 GRPO / DPO 对齐，作业说明本身即教程，几乎不给脚手架。',
@@ -535,8 +545,7 @@ window.addEventListener('keydown', (event) => {
             rel="noreferrer"
             :aria-label="`${book.zh}，在新窗口打开独立站点`"
           >
-            <img v-if="book.cover" class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
-            <div v-else class="book-cover book-cover-step" aria-hidden="true"><span>{{ book.step }}</span></div>
+            <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
             <div class="book-info">
               <h2 class="book-title">{{ book.title }}</h2>
               <p class="book-zh">{{ book.zh }}</p>

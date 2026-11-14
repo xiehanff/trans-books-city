@@ -79,6 +79,17 @@ const BOOKS = [
     category: 'ai',
   },
   {
+    slug: 'cs329z-chinese',
+    title: 'CS329Z',
+    zh: 'Engineering AI Agents · AI Agent 系统工程',
+    kind: '中文教程',
+    label: 'ENGINEERING AI AGENTS',
+    author: 'wanghao-SunSky',
+    cover: coverStanfordAi,
+    desc: '斯坦福 CS329Z 中文教程，19 讲与 4 项实践，涵盖 LLM、RAG、工具调用、Agent 记忆、多智能体、评测与安全。',
+    category: 'ai',
+  },
+  {
     slug: 'c-notes',
     title: 'C',
     zh: 'C 语言笔记',
@@ -305,7 +316,7 @@ const CATEGORIES = [
   { key: 'cs101', title: 'CS101', desc: '计算机基础' },
   { key: 'programming', title: '编程语言', desc: 'C / C++ 与系统底层' },
   { key: 'ai-prereq', title: 'AI 前置', desc: 'CS336 前置：按 01–05 顺序完成', note: '完成 01–05 后进入下方 CS336；05 是桥接作业，可与 CS336 正文交替进行。' },
-  { key: 'ai', title: 'AI', desc: '人工智能与大模型', note: 'CS336 先完成上方 AI 前置 01–05；CS146S 从 AI 编程与代理工程切入，前置是 Python 与软件工程基础，不要求 01–05。' },
+  { key: 'ai', title: 'AI', desc: '人工智能与大模型', note: 'CS336 先完成上方 AI 前置 01–05；CS146S 聚焦 AI 编程与代理工程；CS329Z 系统学习 Agent 构建、评测与安全。' },
 ]
 const booksIn = (category) => BOOKS.filter((book) => book.category === category)
 const externalBooksIn = (category) => category === 'ai-prereq'

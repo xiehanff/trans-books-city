@@ -32,6 +32,7 @@ import coverComputerNetworking from './assets/covers/computer-networking-top-dow
 import coverCraftingInterpreters from './assets/covers/crafting-interpreters.jpg'
 import coverHelloAlgo from './assets/covers/hello-algo.jpg'
 import coverDiyLlm from './assets/covers/diy-llm.jpg'
+import coverStanfordAi from './assets/covers/stanford-ai-course.jpg'
 
 ;[['asm', x86asm], ['bash', bash], ['c', c], ['cpp', cpp], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
@@ -44,6 +45,7 @@ const BOOKS = [
     label: 'COMPUTER SYSTEMS',
     author: 'Randal E. Bryant / David R. O’Hallaron',
     cover: coverCsapp,
+    category: 'cs101',
     desc: '从程序表示与执行，到链接、异常控制流、虚拟内存、网络与并发，系统理解计算机系统的软硬件基础。',
   },
   {
@@ -53,6 +55,7 @@ const BOOKS = [
     label: 'OPERATING SYSTEMS',
     author: 'Remzi H. Arpaci-Dusseau / Andrea C. Arpaci-Dusseau',
     cover: coverOstep,
+    category: 'cs101',
     desc: '以虚拟化、并发、持久性三大主题贯穿进程、调度、内存、文件系统与分布式，对话式讲解操作系统核心原理。',
   },
   {
@@ -62,6 +65,7 @@ const BOOKS = [
     label: 'SICP',
     author: 'Harold Abelson / Gerald Jay Sussman / Julie Sussman',
     cover: coverSicp,
+    category: 'cs101',
     desc: '用 Scheme 讲透过程抽象、数据抽象、模块化与元语言抽象，程序设计的经典之作，裘宗燕译本。',
   },
   {
@@ -71,17 +75,30 @@ const BOOKS = [
     label: 'COMPUTER NETWORKING',
     author: 'James F. Kurose / Keith W. Ross',
     cover: coverComputerNetworking,
+    category: 'cs101',
     desc: '从应用层一路向下，讲透运输层、网络层与链路层，配 Wireshark 实验与编程作业的自顶向下网络经典教材。',
   },
   {
     slug: 'diy-llm',
-    title: 'Diy-LLM',
-    zh: '大模型是怎样炼成的',
-    kind: 'CS336 中文教程',
+    title: 'CS336',
+    zh: 'Diy-LLM · 大模型是怎样炼成的',
+    kind: '中文教程',
     label: 'LARGE LANGUAGE MODELS',
     author: 'Datawhale 社区',
     cover: coverDiyLlm,
     desc: '从分词器、Transformer、MoE、分布式训练到 Scaling Laws、推理与对齐，按构建 LLM 的工程流程重新编排的 CS336 中文教程。',
+    category: 'ai',
+  },
+  {
+    slug: 'stanford-ai-course',
+    title: 'CS146S',
+    zh: 'The Modern Software Developer',
+    kind: 'AI 编程笔记',
+    label: 'AI SOFTWARE ENGINEERING',
+    author: 'FL-Bin',
+    cover: coverStanfordAi,
+    desc: '从编程代理的内部原理、上下文工程与 MCP，到代理代码审查与 AI 代码库安全，按 CS146S 课程主线重排的中文笔记。',
+    category: 'ai',
   },
 ]
 const EXTERNAL_BOOKS = [
@@ -93,6 +110,7 @@ const EXTERNAL_BOOKS = [
     desc: '用 Java 和 C 从零实现 Lox 语言的两种解释器：树遍历的 jlox 与字节码虚拟机 clox，一路做到垃圾回收与优化。',
     meta: 'Robert Nystrom · 30 章 · 独立站点',
     url: 'https://xiehanff.github.io/craftinginterpreters_zh/',
+    category: 'cs101',
   },
   {
     slug: 'hello-algo',
@@ -102,9 +120,16 @@ const EXTERNAL_BOOKS = [
     desc: '动画图解、一键运行的数据结构与算法教程，从复杂度分析、数据结构到树、图与动态规划，附十余种语言的代码实现。',
     meta: '靳宇栋 · 18 章 · 独立站点',
     url: 'https://www.hello-algo.com/',
+    category: 'cs101',
   },
 ]
 const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length
+const CATEGORIES = [
+  { key: 'cs101', title: 'CS101', desc: '计算机基础' },
+  { key: 'ai', title: 'AI', desc: '人工智能与大模型' },
+]
+const booksIn = (category) => BOOKS.filter((book) => book.category === category)
+const externalBooksIn = (category) => EXTERNAL_BOOKS.filter((book) => book.category === category)
 
 const files = import.meta.glob('../books/*/*.md', { query: '?raw', import: 'default' })
 const docs = reactive(Object.entries(files)
@@ -254,8 +279,8 @@ const activeDocKey = computed(() => active.value ? docKey(active.value) : '')
 const groups = computed(() => {
   const sections = [
     { title: '开始阅读', test: (doc) => doc.number === 0 },
-    { title: '正文', test: (doc) => doc.number > 0 && !/附录|勘误|API时效|术语表|更多资源|参考文献/.test(doc.file) },
-    { title: '附录', test: (doc) => doc.number > 0 && /附录|勘误|API时效|术语表|更多资源|参考文献/.test(doc.file) },
+    { title: '正文', test: (doc) => doc.number > 0 && !/附录|勘误|API时效|术语表|更多资源|参考文献|作业/.test(doc.file) },
+    { title: '附录', test: (doc) => doc.number > 0 && /附录|勘误|API时效|术语表|更多资源|参考文献|作业/.test(doc.file) },
   ]
   return sections.map((section) => ({ ...section, docs: filteredDocs.value.filter(section.test) })).filter((section) => section.docs.length)
 })
@@ -331,33 +356,39 @@ window.addEventListener('keydown', (event) => {
         <h1>Trans Books City</h1>
         <p>{{ totalBooks }} 本精选技术书籍与开源教程。本站内书籍逐章整理评审，站外译本与开源教程直达独立站点。</p>
       </section>
-      <section class="book-grid">
-        <button v-for="book in BOOKS" :key="book.slug" class="book-card" @click="openBook(book)">
-          <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
-          <div class="book-info">
-            <h2 class="book-title">{{ book.title }}</h2>
-            <p class="book-zh">{{ book.zh }}{{ book.kind ? ` · ${book.kind}` : ' · 中文版' }}</p>
-            <p class="book-desc">{{ book.desc }}</p>
-            <p class="book-meta">{{ book.author }} · {{ book.chapters.length }} 章</p>
-          </div>
-        </button>
-        <a
-          v-for="book in EXTERNAL_BOOKS"
-          :key="book.slug"
-          class="book-card book-card-external"
-          :href="book.url"
-          target="_blank"
-          rel="noreferrer"
-          :aria-label="`${book.zh}，在新窗口打开独立站点`"
-        >
-          <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
-          <div class="book-info">
-            <h2 class="book-title">{{ book.title }}</h2>
-            <p class="book-zh">{{ book.zh }}</p>
-            <p class="book-desc">{{ book.desc }}</p>
-            <p class="book-meta">{{ book.meta }} <span class="book-external">↗</span></p>
-          </div>
-        </a>
+      <section v-for="category in CATEGORIES" :key="category.key" class="book-section">
+        <div class="section-head">
+          <h2>{{ category.title }}</h2>
+          <span>{{ category.desc }}</span>
+        </div>
+        <div class="book-grid">
+          <button v-for="book in booksIn(category.key)" :key="book.slug" class="book-card" @click="openBook(book)">
+            <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
+            <div class="book-info">
+              <h2 class="book-title">{{ book.title }}</h2>
+              <p class="book-zh">{{ book.zh }}{{ book.kind ? ` · ${book.kind}` : ' · 中文版' }}</p>
+              <p class="book-desc">{{ book.desc }}</p>
+              <p class="book-meta">{{ book.author }} · {{ book.chapters.length }} 章</p>
+            </div>
+          </button>
+          <a
+            v-for="book in externalBooksIn(category.key)"
+            :key="book.slug"
+            class="book-card book-card-external"
+            :href="book.url"
+            target="_blank"
+            rel="noreferrer"
+            :aria-label="`${book.zh}，在新窗口打开独立站点`"
+          >
+            <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
+            <div class="book-info">
+              <h2 class="book-title">{{ book.title }}</h2>
+              <p class="book-zh">{{ book.zh }}</p>
+              <p class="book-desc">{{ book.desc }}</p>
+              <p class="book-meta">{{ book.meta }} <span class="book-external">↗</span></p>
+            </div>
+          </a>
+        </div>
       </section>
       <footer class="home-foot">内容仅供学习交流，版权归原作者所有 · <a :href="REPO">在 GitHub 上查看 ↗</a></footer>
     </div>

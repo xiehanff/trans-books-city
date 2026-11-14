@@ -33,3 +33,6 @@
 .section-head h2{margin:0;font-size:20px;font-weight:650;letter-spacing:-.01em;color:#25292e}
 .section-head span{font-size:12px;color:#858b94}
 .book-section .book-grid{margin-bottom:0}
+
+/* 站内代码文件查看 */
+.code-page{padding-top:64px;min-height:100vh;background:#fff}.code-wrap{max-width:1100px;margin:0 auto;padding:32px 54px 60px}.code-head{display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:22px;font-size:13px;color:#858b94}.code-head a{color:#60666f;white-space:nowrap}.code-head a:hover{color:var(--accent)}.code-path{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:12px 'Google Sans Mono Local',monospace;color:#858b94}.code-view{margin:0;padding:20px;background:#f6f7f9;border:1px solid var(--line);border-radius:8px;overflow:auto;font:13px/1.65 'Google Sans Mono Local',monospace;tab-size:4}.code-view code.hljs{background:transparent;padding:0;font:inherit}@media(max-width:800px){.code-wrap{padding:24px 18px}.code-head{flex-wrap:wrap}.code-path{order:3;flex-basis:100%}}

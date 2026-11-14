@@ -268,6 +268,47 @@ const query = ref('')
 const activeBookSlug = ref('')
 const activeId = ref('')
 const menuOpen = ref(false)
+const codePath = ref('')
+const codeContent = ref('')
+const codeError = ref('')
+const CODE_PAGES = {
+  'assignment1-basics': '17-作业1-基础实现.md',
+  'assignment2-systems': '18-作业2-系统优化.md',
+  'assignment3-scaling': '19-作业3-缩放定律.md',
+  'assignment4-data': '20-作业4-数据处理.md',
+  'assignment5-alignment': '21-作业5-对齐.md',
+  'assignment6-evaluation': '23-作业6-模型评估.md',
+}
+const codeRawHref = computed(() => `${import.meta.env.BASE_URL}${codePath.value}`)
+const codeBackHref = computed(() => {
+  const folder = codePath.value.split('/')[3]
+  return `#${encodeURIComponent(`diy-llm/${CODE_PAGES[folder] || '00-前言.md'}`)}`
+})
+const codeHtml = computed(() => {
+  if (!codeContent.value) return ''
+  const ext = codePath.value.split('.').pop().toLowerCase()
+  const lang = { py: 'python', ipynb: 'json', sh: 'bash', toml: 'ini', yaml: 'yaml', yml: 'yaml', json: 'json', md: 'markdown' }[ext]
+  return lang && hljs.getLanguage(lang)
+    ? hljs.highlight(codeContent.value, { language: lang }).value
+    : md.utils.escapeHtml(codeContent.value)
+})
+async function showCode(path) {
+  codePath.value = path
+  codeContent.value = ''
+  codeError.value = ''
+  activeBookSlug.value = ''
+  activeId.value = ''
+  query.value = ''
+  menuOpen.value = false
+  window.scrollTo(0, 0)
+  try {
+    const response = await fetch(`${import.meta.env.BASE_URL}${path}`)
+    if (!response.ok) throw new Error(String(response.status))
+    codeContent.value = await response.text()
+  } catch {
+    codeError.value = '代码文件加载失败，请打开原始文件查看。'
+  }
+}
 const activeBook = computed(() => BOOKS.find((book) => book.slug === activeBookSlug.value) || null)
 const currentDocs = computed(() => (activeBook.value ? activeBook.value.chapters : []))
 const active = computed(() => currentDocs.value.find((doc) => doc.id === activeId.value) || currentDocs.value[0])
@@ -296,6 +337,7 @@ onMounted(renderMermaidBlocks)
 onUpdated(renderMermaidBlocks)
 
 function activateDoc(doc, scrollToTop = true) {
+  codePath.value = ''
   if (doc.book !== activeBookSlug.value) query.value = ''
   activeBookSlug.value = doc.book
   activeId.value = doc.id
@@ -315,6 +357,7 @@ function openBook(book) {
 }
 function goHome() {
   location.hash = ''
+  codePath.value = ''
   activeBookSlug.value = ''
   activeId.value = ''
   query.value = ''
@@ -325,9 +368,14 @@ function goHome() {
 function syncFromHash(scrollToTop = true) {
   const id = decodeURIComponent(location.hash.slice(1)).replace(/^\//, '')
   if (!id) {
-    if (activeBookSlug.value) goHome()
+    if (activeBookSlug.value || codePath.value) goHome()
     return
   }
+  if (id.startsWith('code/')) {
+    showCode(id.slice(5))
+    return
+  }
+  codePath.value = ''
   const [slug, file] = id.split('/')
   const book = BOOKS.find((item) => item.slug === slug)
   const doc = book ? book.chapters.find((item) => item.file === file) : null
@@ -350,7 +398,19 @@ window.addEventListener('keydown', (event) => {
     <a class="brand" href="#" @click.prevent="goHome"><span class="brand-mark">T</span><span>Trans Books City</span></a>
     <div class="top-actions"><span class="edition">中文译本与教程 · 精选技术书籍</span><a :href="REPO" target="_blank" rel="noreferrer" aria-label="GitHub">GitHub ↗</a></div>
   </header>
-  <main v-if="!activeBook" class="home">
+  <main v-if="codePath" class="code-page">
+    <div class="code-wrap">
+      <div class="code-head">
+        <a :href="codeBackHref">← 返回作业</a>
+        <span class="code-path">{{ codePath }}</span>
+        <a :href="codeRawHref" target="_blank" rel="noreferrer">原始文件 ↗</a>
+      </div>
+      <p v-if="codeError" class="article-status article-error" role="alert">{{ codeError }}</p>
+      <p v-else-if="!codeContent" class="article-status" role="status">正在加载代码…</p>
+      <pre v-else class="code-view"><code class="hljs" v-html="codeHtml"></code></pre>
+    </div>
+  </main>
+  <main v-else-if="!activeBook" class="home">
     <div class="home-wrap">
       <section class="home-hero">
         <h1>Trans Books City</h1>

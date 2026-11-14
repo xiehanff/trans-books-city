@@ -8,6 +8,7 @@ import 'katex/dist/katex.min.css'
 import hljs from 'highlight.js/lib/core'
 import bash from 'highlight.js/lib/languages/bash'
 import c from 'highlight.js/lib/languages/c'
+import cpp from 'highlight.js/lib/languages/cpp'
 import csharp from 'highlight.js/lib/languages/csharp'
 import css from 'highlight.js/lib/languages/css'
 import dockerfile from 'highlight.js/lib/languages/dockerfile'
@@ -30,8 +31,9 @@ import coverSicp from './assets/covers/sicp-2e.jpg'
 import coverComputerNetworking from './assets/covers/computer-networking-top-down.jpg'
 import coverCraftingInterpreters from './assets/covers/crafting-interpreters.jpg'
 import coverHelloAlgo from './assets/covers/hello-algo.jpg'
+import coverDiyLlm from './assets/covers/diy-llm.jpg'
 
-;[['asm', x86asm], ['bash', bash], ['c', c], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
+;[['asm', x86asm], ['bash', bash], ['c', c], ['cpp', cpp], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
 const REPO = 'https://github.com/xiehanff/trans-books-city'
 const BOOKS = [
@@ -70,6 +72,16 @@ const BOOKS = [
     author: 'James F. Kurose / Keith W. Ross',
     cover: coverComputerNetworking,
     desc: '从应用层一路向下，讲透运输层、网络层与链路层，配 Wireshark 实验与编程作业的自顶向下网络经典教材。',
+  },
+  {
+    slug: 'diy-llm',
+    title: 'Diy-LLM',
+    zh: '大模型是怎样炼成的',
+    kind: 'CS336 中文教程',
+    label: 'LARGE LANGUAGE MODELS',
+    author: 'Datawhale 社区',
+    cover: coverDiyLlm,
+    desc: '从分词器、Transformer、MoE、分布式训练到 Scaling Laws、推理与对齐，按构建 LLM 的工程流程重新编排的 CS336 中文教程。',
   },
 ]
 const EXTERNAL_BOOKS = [
@@ -143,6 +155,7 @@ async function loadDoc(doc) {
   return pendingLoads.get(key)
 }
 
+const slugify = (value) => value.trim().toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
 const md = new MarkdownIt({
   html: true,
   linkify: true,
@@ -151,7 +164,31 @@ const md = new MarkdownIt({
     if (language && hljs.getLanguage(language)) return `<pre class="hljs"><code>${hljs.highlight(code, { language }).value}</code></pre>`
     return `<pre class="hljs"><code>${md.utils.escapeHtml(code)}</code></pre>`
   },
-}).use(markdownItAnchor, { permalink: false })
+}).use(markdownItAnchor, { permalink: false, slugify })
+function mathInline(state, silent) {
+  if (state.env.doc?.book !== 'diy-llm') return false
+  const start = state.pos
+  if (state.src.charCodeAt(start) !== 0x24 || state.src.charCodeAt(start + 1) === 0x24) return false
+  let end = start + 1
+  while ((end = state.src.indexOf('$', end)) !== -1) {
+    if (state.src.charCodeAt(end - 1) !== 0x5c) break
+    end += 1
+  }
+  if (end === -1) return false
+  const raw = state.src.slice(start + 1, end)
+  const content = raw.trim()
+  if (!content || content.includes('\n')) return false
+  if (/^\s|\s$/.test(raw) && !/[\\^_={}]/.test(content)) return false
+  if (!silent) {
+    const token = state.push('math_inline', 'math', 0)
+    token.content = content
+    token.markup = '$'
+  }
+  state.pos = end + 1
+  return true
+}
+md.inline.ruler.after('backticks', 'math_inline', mathInline)
+md.renderer.rules.math_inline = (tokens, idx) => katex.renderToString(tokens[idx].content, { displayMode: false, throwOnError: false })
 function renderMarkdown(content, doc) {
   const math = []
   const linkSafeContent = content.replace(
@@ -162,7 +199,9 @@ function renderMarkdown(content, doc) {
     math.push(katex.renderToString(expression.trim(), { displayMode: true, throwOnError: false }))
     return `\n\n@@MATH${math.length - 1}@@\n\n`
   })
-  return md.render(source, { doc }).replace(/<p>@@MATH(\d+)@@<\/p>/g, (_, index) => `<div class="math-display">${math[Number(index)]}</div>`)
+  return md.render(source, { doc })
+    .replace(/<p>@@MATH(\d+)@@<\/p>/g, (_, index) => `<div class="math-display">${math[Number(index)]}</div>`)
+    .replace(/<img\b(?![^>]*\bloading=)/gi, '<img loading="lazy" decoding="async"')
 }
 mermaid.initialize({ startOnLoad: false, theme: 'neutral', fontFamily: 'inherit', flowchart: { curve: 'basis' } })
 const defaultFence = md.renderer.rules.fence.bind(md)
@@ -284,20 +323,20 @@ window.addEventListener('keydown', (event) => {
   <header class="topbar">
     <button class="menu-toggle" aria-label="切换目录" @click="menuOpen = !menuOpen">☰</button>
     <a class="brand" href="#" @click.prevent="goHome"><span class="brand-mark">T</span><span>Trans Books City</span></a>
-    <div class="top-actions"><span class="edition">中文译本 · 精选技术书籍</span><a :href="REPO" target="_blank" rel="noreferrer" aria-label="GitHub">GitHub ↗</a></div>
+    <div class="top-actions"><span class="edition">中文译本与教程 · 精选技术书籍</span><a :href="REPO" target="_blank" rel="noreferrer" aria-label="GitHub">GitHub ↗</a></div>
   </header>
   <main v-if="!activeBook" class="home">
     <div class="home-wrap">
       <section class="home-hero">
         <h1>Trans Books City</h1>
-        <p>{{ totalBooks }} 本精选技术书籍与开源教程。本站内译本逐章评审并与原书核对，站外译本与开源教程直达独立站点。</p>
+        <p>{{ totalBooks }} 本精选技术书籍与开源教程。本站内书籍逐章整理评审，站外译本与开源教程直达独立站点。</p>
       </section>
       <section class="book-grid">
         <button v-for="book in BOOKS" :key="book.slug" class="book-card" @click="openBook(book)">
           <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
           <div class="book-info">
             <h2 class="book-title">{{ book.title }}</h2>
-            <p class="book-zh">{{ book.zh }} · 中文版</p>
+            <p class="book-zh">{{ book.zh }}{{ book.kind ? ` · ${book.kind}` : ' · 中文版' }}</p>
             <p class="book-desc">{{ book.desc }}</p>
             <p class="book-meta">{{ book.author }} · {{ book.chapters.length }} 章</p>
           </div>
@@ -320,7 +359,7 @@ window.addEventListener('keydown', (event) => {
           </div>
         </a>
       </section>
-      <footer class="home-foot">译本仅供学习交流，版权归原作者所有 · <a :href="REPO">在 GitHub 上查看 ↗</a></footer>
+      <footer class="home-foot">内容仅供学习交流，版权归原作者所有 · <a :href="REPO">在 GitHub 上查看 ↗</a></footer>
     </div>
   </main>
   <div v-else class="shell">
@@ -333,7 +372,7 @@ window.addEventListener('keydown', (event) => {
           <button v-for="doc in group.docs" :key="doc.id" class="nav-item" :class="{ active: active.id === doc.id }" @click="select(doc)">{{ navTitle(doc) }}</button>
         </section>
       </nav>
-      <div class="sidebar-foot">{{ activeBook.title }} · 中文译本<br /><a :href="REPO">在 GitHub 上查看 ↗</a></div>
+      <div class="sidebar-foot">{{ activeBook.title }} · {{ activeBook.kind || '中文译本' }}<br /><a :href="REPO">在 GitHub 上查看 ↗</a></div>
     </aside>
     <main class="main">
       <div class="article-wrap">
@@ -355,7 +394,7 @@ window.addEventListener('keydown', (event) => {
             <span class="pagination-title">{{ nextDoc.title }}</span>
           </button>
         </nav>
-        <footer class="article-footer"><span>译本仅供学习交流，版权归原作者所有</span><a :href="REPO">GitHub ↗</a></footer>
+        <footer class="article-footer"><span>内容仅供学习交流，版权归原作者所有</span><a :href="REPO">GitHub ↗</a></footer>
       </div>
     </main>
   </div>

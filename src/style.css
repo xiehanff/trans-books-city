@@ -21,3 +21,8 @@
 /* 站外译本入口 */
 .book-card-external .book-meta{color:var(--accent)}
 .book-external{font-size:13px;line-height:1}
+
+/* 书籍插图与内联公式 */
+.markdown-body img{height:auto}
+.markdown-body div[align="center"]{text-align:center}
+.markdown-body div[align="center"] img{display:block;margin:0 auto}

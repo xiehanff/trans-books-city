@@ -33,7 +33,6 @@ import coverCsapp from './assets/covers/csapp-third-edition.jpg'
 import coverOstep from './assets/covers/ostep.jpg'
 import coverSicp from './assets/covers/sicp-2e.jpg'
 import coverComputerNetworking from './assets/covers/computer-networking-top-down.jpg'
-import coverWebBrowser from './assets/covers/web-browser-engineering.jpg'
 import coverCraftingInterpreters from './assets/covers/crafting-interpreters.jpg'
 import coverHelloAlgo from './assets/covers/hello-algo.jpg'
 import coverDiyLlm from './assets/covers/diy-llm.jpg'
@@ -57,16 +56,6 @@ import coverAlgorithmDesignManual from './assets/covers/algorithm-design-manual.
 
 const REPO = 'https://github.com/xiehanff/trans-books-city'
 const BOOKS = [
-  {
-    slug: 'web-browser-engineering',
-    title: 'Web Browser Engineering',
-    zh: '浏览器工程',
-    label: 'WEB BROWSER ENGINEERING',
-    author: 'Pavel Panchekha / Chris Harrelson',
-    cover: coverWebBrowser,
-    desc: '从网络、HTML、CSS 到布局、绘制与 JavaScript，亲手构建一个浏览器。',
-    category: 'cs101',
-  },
   {
     slug: 'diy-llm',
     title: 'CS336',

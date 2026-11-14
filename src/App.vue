@@ -151,7 +151,7 @@ const AI_PREREQ_BOOKS = [
     title: 'Neural Networks: Zero to Hero',
     zh: '从零构建神经网络 · 手写反向传播',
     desc: '用 micrograd 搭出 autograd 引擎，makemore 逐层手动反传，最后手写 GPT；直接对应 CS336 的 tokenization、架构与训练。',
-    meta: 'Andrej Karpathy · 6 讲 · 约 45 小时',
+    meta: 'Andrej Karpathy · 8 讲 · 约 45 小时',
     url: 'https://github.com/karpathy/nn-zero-to-hero',
     category: 'ai-prereq',
   },
@@ -159,11 +159,11 @@ const AI_PREREQ_BOOKS = [
     slug: 'nanogpt-gpt2',
     step: '03',
     cover: coverAiNanogpt,
-    title: 'nanoGPT',
+    title: 'Build nanoGPT',
     zh: 'Let’s reproduce GPT-2 (124M)',
     desc: '四小时视频逐行写 causal attention、AdamW、warmup + cosine、混合精度与 checkpoint，再改造成 RMSNorm / RoPE / SwiGLU。',
-    meta: 'Andrej Karpathy · 视频与仓库 · 约 55 小时',
-    url: 'https://github.com/karpathy/nanoGPT',
+    meta: 'Andrej Karpathy · 视频 + 代码 · 约 55 小时',
+    url: 'https://github.com/karpathy/build-nanogpt',
     category: 'ai-prereq',
   },
   {
@@ -184,8 +184,8 @@ const AI_PREREQ_BOOKS = [
     title: 'CS336 Assignments',
     zh: '语言模型从零实现 · 官方作业',
     desc: '作业 4 的 Common Crawl 清洗与 MinHash 去重、作业 5 的 SFT 与 GRPO / DPO 对齐，作业说明本身即教程，几乎不给脚手架。',
-    meta: 'Stanford · GitHub · 需 GPU 与数据磁盘',
-    url: 'https://github.com/stanford-cs336/assignment4-data',
+    meta: 'Stanford · GitHub · 作业 1–5 · 需 GPU 与数据磁盘',
+    url: 'https://github.com/stanford-cs336',
     category: 'ai-prereq',
   },
 ]
@@ -225,8 +225,8 @@ const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length + AI_PREREQ_BOOKS.length
 const CATEGORIES = [
   { key: 'cs101', title: 'CS101', desc: '计算机基础' },
   { key: 'programming', title: '编程语言', desc: 'C / C++ 与系统底层' },
-  { key: 'ai-prereq', title: 'AI 前置', desc: '进入 CS336 前按顺序完成的五门课' },
-  { key: 'ai', title: 'AI', desc: '人工智能与大模型' },
+  { key: 'ai-prereq', title: 'AI 前置', desc: 'CS336 前置：按 01–05 顺序完成', note: '完成 01–05 后进入下方 CS336；05 是桥接作业，可与 CS336 正文交替进行。' },
+  { key: 'ai', title: 'AI', desc: '人工智能与大模型', note: 'CS336 先完成上方 AI 前置 01–05；CS146S 从 AI 编程与代理工程切入，前置是 Python 与软件工程基础，不要求 01–05。' },
 ]
 const booksIn = (category) => BOOKS.filter((book) => book.category === category)
 const externalBooksIn = (category) => category === 'ai-prereq'
@@ -519,13 +519,14 @@ window.addEventListener('keydown', (event) => {
     <div class="home-wrap">
       <section class="home-hero">
         <h1>Trans Books City</h1>
-        <p>{{ totalBooks }} 本精选技术书籍与开源教程。本站内书籍逐章整理评审，站外译本与开源教程直达独立站点。</p>
+        <p>{{ totalBooks }} 个精选技术书籍与开源课程。本站内书籍逐章整理评审，站外译本与开源教程直达独立站点。</p>
       </section>
       <section v-for="category in CATEGORIES" :key="category.key" class="book-section">
         <div class="section-head">
           <h2>{{ category.title }}</h2>
           <span>{{ category.desc }}</span>
         </div>
+        <p v-if="category.note" class="section-note">{{ category.note }}</p>
         <div class="book-grid">
           <button v-for="book in booksIn(category.key)" :key="book.slug" class="book-card" @click="openBook(book)">
             <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
@@ -550,7 +551,7 @@ window.addEventListener('keydown', (event) => {
               <h2 class="book-title">{{ book.title }}</h2>
               <p class="book-zh">{{ book.zh }}</p>
               <p class="book-desc">{{ book.desc }}</p>
-              <p class="book-meta">{{ book.meta }} <span class="book-external">↗</span></p>
+              <p class="book-meta"><span v-if="book.step" class="book-step">{{ book.step }} ·</span>{{ book.meta }} <span class="book-external">↗</span></p>
             </div>
           </a>
         </div>

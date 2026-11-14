@@ -19,7 +19,9 @@
 }
 
 /* 站外译本入口 */
-.book-card-external .book-meta{color:var(--accent)}.book-external{font-size:13px;line-height:1}
+.book-card-external .book-meta{color:var(--accent)}
+.book-step{display:inline-block;min-width:18px;margin-right:6px;font:650 11px 'Google Sans Mono Local',monospace;color:var(--accent);letter-spacing:.06em}
+.book-external{font-size:13px;line-height:1}
 
 /* 书籍插图与内联公式 */
 .markdown-body img{height:auto}
@@ -31,6 +33,7 @@
 .section-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
 .section-head h2{margin:0;font-size:20px;font-weight:650;letter-spacing:-.01em;color:#25292e}
 .section-head span{font-size:12px;color:#858b94}
+.section-note{margin:-4px 0 15px;font-size:13px;line-height:1.7;color:#6f767e;max-width:760px}
 .book-section .book-grid{margin-bottom:0}
 
 /* 站内代码文件查看 */

@@ -16,6 +16,8 @@ import fsharp from 'highlight.js/lib/languages/fsharp'
 import graphql from 'highlight.js/lib/languages/graphql'
 import javascript from 'highlight.js/lib/languages/javascript'
 import json from 'highlight.js/lib/languages/json'
+import lua from 'highlight.js/lib/languages/lua'
+import makefile from 'highlight.js/lib/languages/makefile'
 import markdown from 'highlight.js/lib/languages/markdown'
 import plaintext from 'highlight.js/lib/languages/plaintext'
 import python from 'highlight.js/lib/languages/python'
@@ -33,8 +35,10 @@ import coverCraftingInterpreters from './assets/covers/crafting-interpreters.jpg
 import coverHelloAlgo from './assets/covers/hello-algo.jpg'
 import coverDiyLlm from './assets/covers/diy-llm.jpg'
 import coverStanfordAi from './assets/covers/stanford-ai-course.jpg'
+import coverCNotes from './assets/covers/c-notes.jpg'
+import coverCppNotes from './assets/covers/cpp-notes.jpg'
 
-;[['asm', x86asm], ['bash', bash], ['c', c], ['cpp', cpp], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
+;[['asm', x86asm], ['bash', bash], ['c', c], ['cpp', cpp], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['lua', lua], ['makefile', makefile], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
 const REPO = 'https://github.com/xiehanff/trans-books-city'
 const BOOKS = [
@@ -100,6 +104,17 @@ const BOOKS = [
     desc: '从编程代理的内部原理、上下文工程与 MCP，到代理代码审查与 AI 代码库安全，按 CS146S 课程主线重排的中文笔记。',
     category: 'ai',
   },
+  {
+    slug: 'c-notes',
+    title: 'C',
+    zh: 'C 语言笔记',
+    kind: '从语法到系统',
+    label: 'C PROGRAMMING',
+    author: '个人笔记',
+    cover: coverCNotes,
+    desc: '从程序结构、指针与内存，到链接、汇编、Makefile 与工程实践，按学习顺序整理的中文 C 语言笔记。',
+    category: 'programming',
+  },
 ]
 const EXTERNAL_BOOKS = [
   {
@@ -122,10 +137,21 @@ const EXTERNAL_BOOKS = [
     url: 'https://www.hello-algo.com/',
     category: 'cs101',
   },
+  {
+    slug: 'cpp-notes',
+    title: 'C++',
+    zh: 'Learn C++ · 从入门到现代 C++',
+    cover: coverCppNotes,
+    desc: '系统讲解 C++ 语法、类与对象、继承、多态、模板与 STL 的免费教程，适合从 C 语言过渡到现代 C++。',
+    meta: 'learncpp.com · 站外教程',
+    url: 'https://www.learncpp.com/',
+    category: 'programming',
+  },
 ]
 const totalBooks = BOOKS.length + EXTERNAL_BOOKS.length
 const CATEGORIES = [
   { key: 'cs101', title: 'CS101', desc: '计算机基础' },
+  { key: 'programming', title: '编程语言', desc: 'C / C++ 与系统底层' },
   { key: 'ai', title: 'AI', desc: '人工智能与大模型' },
 ]
 const booksIn = (category) => BOOKS.filter((book) => book.category === category)
@@ -280,9 +306,11 @@ const CODE_PAGES = {
   'assignment6-evaluation': '23-作业6-模型评估.md',
 }
 const codeRawHref = computed(() => `${import.meta.env.BASE_URL}${codePath.value}`)
+const codeBackLabel = computed(() => codePath.value.split('/')[1] === 'c-notes' ? '← 返回 C 笔记' : '← 返回作业')
 const codeBackHref = computed(() => {
-  const folder = codePath.value.split('/')[3]
-  return `#${encodeURIComponent(`diy-llm/${CODE_PAGES[folder] || '00-前言.md'}`)}`
+  const parts = codePath.value.split('/')
+  if (parts[1] === 'c-notes') return `#${encodeURIComponent('c-notes/00-大纲与目录.md')}`
+  return `#${encodeURIComponent(`diy-llm/${CODE_PAGES[parts[3]] || '00-前言.md'}`)}`
 })
 const codeHtml = computed(() => {
   if (!codeContent.value) return ''
@@ -401,7 +429,7 @@ window.addEventListener('keydown', (event) => {
   <main v-if="codePath" class="code-page">
     <div class="code-wrap">
       <div class="code-head">
-        <a :href="codeBackHref">← 返回作业</a>
+        <a :href="codeBackHref">{{ codeBackLabel }}</a>
         <span class="code-path">{{ codePath }}</span>
         <a :href="codeRawHref" target="_blank" rel="noreferrer">原始文件 ↗</a>
       </div>

@@ -1,0 +1,23 @@
+17-22 章及 S09 平台示例验证夹具
+================================
+
+check_platform_examples.py 只验证这里的安全、最小示例，不会从 Markdown 中提取或执行代码。运行：
+
+    python3 tools/check_platform_examples.py --check
+
+也可以从仓库根目录使用该脚本的路径运行。每项输出 PASS 或明确的 SKIP；工具缺失或平台不匹配的 SKIP 退出码仍为 0，夹具失败则退出码为 1，参数错误退出码为 2。脚本只使用 Python 标准库，并在临时目录中编译和运行，仓库内不会留下构建产物。
+
+覆盖内容：
+- byte_order_sizeof.c：读取一个 uint32_t 的字节表示，并报告 sizeof(int) 与 sizeof(void*)。
+- preprocessor_macros.c：验证 -D 宏、#if、字符串化和 ## 连接；检查器还查看 -E -P 的结果。
+- link_main.c + link_value.c：分别编译、链接并运行两源文件程序。
+- Makefile：使用 GNU make 编译上面的两源文件，运行目标并执行 clean；只在 GNU make 和 C 编译器可用时验证。
+- asm_add.S：仅在 x86-64 主机上进行汇编语法检查，不链接也不执行汇编代码。其他架构明确 SKIP。
+- safe_commands.sh：使用 bash -n 后运行只包含变量、条件和 printf 的安全命令。
+- S09_简易HTTP协议.md 中的三个标记源码块：提取、编译并启动本地 HTTP/1.1 服务器，验证 200/400/404/405 四类响应。
+
+安全边界：
+- 没有执行第 19 章中的 `int $3`；它会触发断点陷阱（SIGTRAP），不是普通 smoke test。
+- 没有执行第 18 章或其他示例中的无限循环；这类代码可能永久占用验证进程，且没有教学上的必要。
+- 没有验证直接系统调用、动态库安装、/usr/local 写入、LD_LIBRARY_PATH 修改等具有环境副作用的命令。
+- x86 汇编夹具只含寄存器加法和 ret，并且只做语法/架构匹配检查，避免把平台相关机器码作为可执行程序运行。

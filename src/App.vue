@@ -43,6 +43,7 @@ import coverAiNn from './assets/covers/ai-prereq-nn.jpg'
 import coverAiNanogpt from './assets/covers/ai-prereq-nanogpt.jpg'
 import coverAiCuda from './assets/covers/ai-prereq-cuda.jpg'
 import coverAiCs336 from './assets/covers/ai-prereq-cs336.jpg'
+import coverAlgorithmDesignManual from './assets/covers/algorithm-design-manual.jpg'
 
 ;[['asm', x86asm], ['bash', bash], ['c', c], ['cpp', cpp], ['csharp', csharp], ['css', css], ['dockerfile', dockerfile], ['fsharp', fsharp], ['graphql', graphql], ['javascript', javascript], ['json', json], ['jsx', javascript], ['lua', lua], ['makefile', makefile], ['markdown', markdown], ['python', python], ['sql', sql], ['text', plaintext], ['tsx', typescript], ['typescript', typescript], ['yaml', yaml], ['html', xml]].forEach(([name, language]) => hljs.registerLanguage(name, language))
 
@@ -180,6 +181,16 @@ const AI_PREREQ_BOOKS = [
   },
 ]
 const EXTERNAL_BOOKS = [
+  {
+    slug: 'algorithm-design-manual-pdf',
+    title: 'The Algorithm Design Manual',
+    zh: '算法设计指南（第 2 版）· 原书扫描版',
+    cover: coverAlgorithmDesignManual,
+    desc: '中文译本原书扫描 PDF，377 页，含全部插图、习题与参考文献，适合完整阅读与对照。',
+    meta: '清华大学出版社 · 377 页 · 站内 PDF',
+    url: 'books/the-algorithm-design-manual/algorithm-design-manual-2e-zh.pdf',
+    category: 'cs101',
+  },
   {
     slug: 'craftinginterpreters-zh',
     title: 'Crafting Interpreters',
@@ -544,7 +555,7 @@ window.addEventListener('keydown', (event) => {
             :href="book.url"
             target="_blank"
             rel="noreferrer"
-            :aria-label="`${book.zh}，在新窗口打开独立站点`"
+            :aria-label="`${book.zh}，在新窗口打开${book.url.startsWith('http') ? '独立站点' : '站内 PDF'}`"
           >
             <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
             <div class="book-info">

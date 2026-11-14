@@ -31,6 +31,7 @@ import coverCsapp from './assets/covers/csapp-third-edition.jpg'
 import coverOstep from './assets/covers/ostep.jpg'
 import coverSicp from './assets/covers/sicp-2e.jpg'
 import coverComputerNetworking from './assets/covers/computer-networking-top-down.jpg'
+import coverAlgorithmDesignManual from './assets/covers/algorithm-design-manual.jpg'
 import coverCraftingInterpreters from './assets/covers/crafting-interpreters.jpg'
 import coverHelloAlgo from './assets/covers/hello-algo.jpg'
 import coverDiyLlm from './assets/covers/diy-llm.jpg'
@@ -81,6 +82,16 @@ const BOOKS = [
     cover: coverComputerNetworking,
     category: 'cs101',
     desc: '从应用层一路向下，讲透运输层、网络层与链路层，配 Wireshark 实验与编程作业的自顶向下网络经典教材。',
+  },
+  {
+    slug: 'the-algorithm-design-manual',
+    title: 'The Algorithm Design Manual',
+    zh: '算法设计指南（第 2 版）',
+    label: 'ALGORITHMS',
+    author: 'Steven S. Skiena',
+    cover: coverAlgorithmDesignManual,
+    desc: '从算法设计、算法分析到数据结构、图算法、动态规划与难解问题，配实战问题目录的算法设计经典教材。',
+    category: 'cs101',
   },
   {
     slug: 'diy-llm',
@@ -207,6 +218,7 @@ async function loadDoc(doc) {
 }
 
 const slugify = (value) => value.trim().toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-')
+const INLINE_MATH_BOOKS = new Set(['diy-llm', 'the-algorithm-design-manual'])
 const md = new MarkdownIt({
   html: true,
   linkify: true,
@@ -217,7 +229,7 @@ const md = new MarkdownIt({
   },
 }).use(markdownItAnchor, { permalink: false, slugify })
 function mathInline(state, silent) {
-  if (state.env.doc?.book !== 'diy-llm') return false
+  if (!INLINE_MATH_BOOKS.has(state.env.doc?.book)) return false
   const start = state.pos
   if (state.src.charCodeAt(start) !== 0x24 || state.src.charCodeAt(start + 1) === 0x24) return false
   let end = start + 1

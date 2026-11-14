@@ -38,3 +38,18 @@
 
 /* 站内代码文件查看 */
 .code-page{padding-top:64px;min-height:100vh;background:#fff}.code-wrap{max-width:1100px;margin:0 auto;padding:32px 54px 60px}.code-head{display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:22px;font-size:13px;color:#858b94}.code-head a{color:#60666f;white-space:nowrap}.code-head a:hover{color:var(--accent)}.code-path{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:12px 'Google Sans Mono Local',monospace;color:#858b94}.code-view{margin:0;padding:20px;background:#f6f7f9;border:1px solid var(--line);border-radius:8px;overflow:auto;font:13px/1.65 'Google Sans Mono Local',monospace;tab-size:4}.code-view code.hljs{background:transparent;padding:0;font:inherit}@media(max-width:800px){.code-wrap{padding:24px 18px}.code-head{flex-wrap:wrap}.code-path{order:3;flex-basis:100%}}
+
+/* 站内 PDF 阅读 */
+.pdf-page{padding-top:64px;min-height:100vh;background:#f4f5f7}
+.pdf-toolbar{position:sticky;top:64px;z-index:4;display:flex;align-items:center;gap:16px;padding:11px 24px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:13px}
+.pdf-toolbar a{color:#60666f;white-space:nowrap}.pdf-toolbar a:hover{color:var(--accent)}
+.pdf-ctrl{margin-left:auto;display:flex;align-items:center;gap:8px}
+.pdf-ctrl button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 10px;cursor:pointer;color:#52575f}
+.pdf-ctrl button:hover:not(:disabled){border-color:#fe9a78;color:var(--accent)}
+.pdf-ctrl button:disabled{opacity:.45;cursor:default}
+.pdf-ctrl input{width:62px;border:1px solid var(--line);border-radius:5px;padding:5px 6px;text-align:center;font:12px 'Google Sans Mono Local',monospace}
+.pdf-ctrl span{font:12px 'Google Sans Mono Local',monospace;color:#858b94}
+.pdf-view{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
+.pdf-canvas-wrap{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 2px 10px #1b273312}
+.pdf-canvas-wrap canvas{display:block;width:100%;height:auto}
+@media(max-width:800px){.pdf-toolbar{padding:10px 14px;flex-wrap:wrap;gap:10px}.pdf-ctrl{margin-left:0;order:3;width:100%;justify-content:space-between}.pdf-view{padding:14px}}

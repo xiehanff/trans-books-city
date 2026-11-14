@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, onUpdated, reactive, ref } from 'vue'
+import { computed, nextTick, onMounted, onUpdated, reactive, ref } from 'vue'
 import MarkdownIt from 'markdown-it'
 import mermaid from 'mermaid'
 import markdownItAnchor from 'markdown-it-anchor'
@@ -27,6 +27,8 @@ import xml from 'highlight.js/lib/languages/xml'
 import x86asm from 'highlight.js/lib/languages/x86asm'
 import yaml from 'highlight.js/lib/languages/yaml'
 import 'highlight.js/styles/github.css'
+import * as pdfjsLib from 'pdfjs-dist'
+import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 import coverCsapp from './assets/covers/csapp-third-edition.jpg'
 import coverOstep from './assets/covers/ostep.jpg'
 import coverSicp from './assets/covers/sicp-2e.jpg'
@@ -190,6 +192,7 @@ const EXTERNAL_BOOKS = [
     meta: '清华大学出版社 · 377 页 · 站内 PDF',
     url: 'books/the-algorithm-design-manual/algorithm-design-manual-2e-zh.pdf',
     category: 'cs101',
+    pdf: true,
   },
   {
     slug: 'craftinginterpreters-zh',
@@ -378,6 +381,8 @@ md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
   return defaultLinkOpen(tokens, idx, options, env, self)
 }
 
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker
+
 const query = ref('')
 const activeBookSlug = ref('')
 const activeId = ref('')
@@ -385,6 +390,16 @@ const menuOpen = ref(false)
 const codePath = ref('')
 const codeContent = ref('')
 const codeError = ref('')
+const pdfPath = ref('')
+const pdfPage = ref(1)
+const pdfPageInput = ref(1)
+const pdfTotal = ref(0)
+const pdfLoading = ref(false)
+const pdfError = ref('')
+const pdfCanvas = ref(null)
+const pdfWrap = ref(null)
+let pdfDoc = null
+const pdfRawHref = computed(() => `${import.meta.env.BASE_URL}${pdfPath.value}`)
 const CODE_PAGES = {
   'assignment1-basics': '17-作业1-基础实现.md',
   'assignment2-systems': '18-作业2-系统优化.md',
@@ -412,6 +427,8 @@ async function showCode(path) {
   codePath.value = path
   codeContent.value = ''
   codeError.value = ''
+  pdfPath.value = ''
+  if (pdfDoc) { try { await pdfDoc.destroy() } catch {} pdfDoc = null }
   activeBookSlug.value = ''
   activeId.value = ''
   query.value = ''
@@ -424,6 +441,61 @@ async function showCode(path) {
   } catch {
     codeError.value = '代码文件加载失败，请打开原始文件查看。'
   }
+}
+function openPdfBook(book) {
+  const hash = encodeURIComponent(`pdf/${book.url}`)
+  if (location.hash.slice(1) === hash) openPdf(book.url)
+  else location.hash = hash
+}
+async function openPdf(path) {
+  codePath.value = ''
+  pdfPath.value = path
+  pdfPage.value = 1
+  pdfPageInput.value = 1
+  pdfTotal.value = 0
+  pdfError.value = ''
+  pdfLoading.value = true
+  activeBookSlug.value = ''
+  activeId.value = ''
+  query.value = ''
+  menuOpen.value = false
+  if (pdfDoc) { try { await pdfDoc.destroy() } catch {} pdfDoc = null }
+  try {
+    pdfDoc = await pdfjsLib.getDocument({ url: `${import.meta.env.BASE_URL}${path}` }).promise
+    pdfTotal.value = pdfDoc.numPages
+    await nextTick()
+    await renderPdfPage(1)
+  } catch {
+    pdfError.value = 'PDF 加载失败，请下载原文件查看。'
+  } finally {
+    pdfLoading.value = false
+  }
+}
+async function renderPdfPage(num) {
+  if (!pdfDoc || !pdfCanvas.value) return
+  const pageNum = Math.min(Math.max(1, Number(num) || 1), pdfDoc.numPages)
+  const page = await pdfDoc.getPage(pageNum)
+  const base = page.getViewport({ scale: 1 })
+  const containerWidth = pdfWrap.value?.clientWidth || 900
+  const dpr = Math.min(window.devicePixelRatio || 1, 2)
+  const scale = (containerWidth / base.width) * dpr
+  const viewport = page.getViewport({ scale })
+  const canvas = pdfCanvas.value
+  canvas.width = Math.floor(viewport.width)
+  canvas.height = Math.floor(viewport.height)
+  await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise
+  pdfPage.value = pageNum
+  pdfPageInput.value = pageNum
+  window.scrollTo(0, 0)
+}
+function pdfPrev() {
+  if (pdfPage.value > 1) renderPdfPage(pdfPage.value - 1)
+}
+function pdfNext() {
+  if (pdfPage.value < pdfTotal.value) renderPdfPage(pdfPage.value + 1)
+}
+function pdfJump() {
+  renderPdfPage(pdfPageInput.value)
 }
 const activeBook = computed(() => BOOKS.find((book) => book.slug === activeBookSlug.value) || null)
 const currentDocs = computed(() => (activeBook.value ? activeBook.value.chapters : []))
@@ -454,6 +526,8 @@ onUpdated(renderMermaidBlocks)
 
 function activateDoc(doc, scrollToTop = true) {
   codePath.value = ''
+  pdfPath.value = ''
+  if (pdfDoc) { pdfDoc.destroy().catch(() => {}); pdfDoc = null }
   if (doc.book !== activeBookSlug.value) query.value = ''
   activeBookSlug.value = doc.book
   activeId.value = doc.id
@@ -474,6 +548,8 @@ function openBook(book) {
 function goHome() {
   location.hash = ''
   codePath.value = ''
+  pdfPath.value = ''
+  if (pdfDoc) { pdfDoc.destroy().catch(() => {}); pdfDoc = null }
   activeBookSlug.value = ''
   activeId.value = ''
   query.value = ''
@@ -484,7 +560,11 @@ function goHome() {
 function syncFromHash(scrollToTop = true) {
   const id = decodeURIComponent(location.hash.slice(1)).replace(/^\//, '')
   if (!id) {
-    if (activeBookSlug.value || codePath.value) goHome()
+    if (activeBookSlug.value || codePath.value || pdfPath.value) goHome()
+    return
+  }
+  if (id.startsWith('pdf/')) {
+    openPdf(id.slice(4))
     return
   }
   if (id.startsWith('code/')) {
@@ -492,6 +572,8 @@ function syncFromHash(scrollToTop = true) {
     return
   }
   codePath.value = ''
+  pdfPath.value = ''
+  if (pdfDoc) { pdfDoc.destroy().catch(() => {}); pdfDoc = null }
   const [slug, file] = id.split('/')
   const book = BOOKS.find((item) => item.slug === slug)
   const doc = book ? book.chapters.find((item) => item.file === file) : null
@@ -514,7 +596,26 @@ window.addEventListener('keydown', (event) => {
     <a class="brand" href="#" @click.prevent="goHome"><span class="brand-mark">T</span><span>Trans Books City</span></a>
     <div class="top-actions"><span class="edition">中文译本与教程 · 精选技术书籍</span><a :href="REPO" target="_blank" rel="noreferrer" aria-label="GitHub">GitHub ↗</a></div>
   </header>
-  <main v-if="codePath" class="code-page">
+  <main v-if="pdfPath" class="pdf-page">
+    <div class="pdf-toolbar">
+      <a href="#" @click.prevent="goHome">← 返回书架</a>
+      <div class="pdf-ctrl">
+        <button type="button" @click="pdfPrev" :disabled="pdfPage <= 1">上一页</button>
+        <input v-model.number="pdfPageInput" type="number" min="1" :max="pdfTotal || 1" aria-label="页码" @change="pdfJump" />
+        <span>/ {{ pdfTotal || '—' }}</span>
+        <button type="button" @click="pdfNext" :disabled="pdfPage >= pdfTotal">下一页</button>
+      </div>
+      <a :href="pdfRawHref" target="_blank" rel="noreferrer">下载原文件 ↗</a>
+    </div>
+    <div class="pdf-view">
+      <p v-if="pdfError" class="article-status article-error" role="alert">{{ pdfError }}</p>
+      <p v-else-if="pdfLoading" class="article-status" role="status">正在加载 PDF…</p>
+      <div v-show="!pdfError" class="pdf-canvas-wrap" ref="pdfWrap">
+        <canvas ref="pdfCanvas"></canvas>
+      </div>
+    </div>
+  </main>
+  <main v-else-if="codePath" class="code-page">
     <div class="code-wrap">
       <div class="code-head">
         <a :href="codeBackHref">{{ codeBackLabel }}</a>
@@ -548,23 +649,26 @@ window.addEventListener('keydown', (event) => {
               <p class="book-meta">{{ book.author }} · {{ book.chapters.length }} 章</p>
             </div>
           </button>
-          <a
+          <component
+            :is="book.pdf ? 'button' : 'a'"
             v-for="book in externalBooksIn(category.key)"
             :key="book.slug"
             class="book-card book-card-external"
-            :href="book.url"
-            target="_blank"
-            rel="noreferrer"
-            :aria-label="`${book.zh}，在新窗口打开${book.url.startsWith('http') ? '独立站点' : '站内 PDF'}`"
+            :type="book.pdf ? 'button' : null"
+            :href="book.pdf ? null : book.url"
+            :target="book.pdf ? null : '_blank'"
+            :rel="book.pdf ? null : 'noreferrer'"
+            :aria-label="book.pdf ? `${book.zh}，在站内阅读 PDF` : `${book.zh}，在新窗口打开独立站点`"
+            @click="book.pdf ? openPdfBook(book) : null"
           >
             <img class="book-cover" :src="book.cover" :alt="`《${book.title}》封面`" loading="lazy" />
             <div class="book-info">
               <h2 class="book-title">{{ book.title }}</h2>
               <p class="book-zh">{{ book.zh }}</p>
               <p class="book-desc">{{ book.desc }}</p>
-              <p class="book-meta"><span v-if="book.step" class="book-step">{{ book.step }} ·</span>{{ book.meta }} <span class="book-external">↗</span></p>
+              <p class="book-meta"><span v-if="book.step" class="book-step">{{ book.step }} ·</span>{{ book.meta }} <span class="book-external">{{ book.pdf ? '阅读' : '↗' }}</span></p>
             </div>
-          </a>
+          </component>
         </div>
       </section>
       <footer class="home-foot">内容仅供学习交流，版权归原作者所有 · <a :href="REPO">在 GitHub 上查看 ↗</a></footer>
